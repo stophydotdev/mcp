@@ -1,0 +1,16 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: Your Stophy API key from stophy.dev/dashboard
+    required:
+      - apiKey
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["-y", "stophy-mcp"],
+      env: { STOPHY_API_KEY: config.apiKey }
+    })

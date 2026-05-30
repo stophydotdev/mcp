@@ -4,7 +4,7 @@ import { stophyFetch } from "../client.js";
 export const channelSchema = {
 	channelUrl: z
 		.string()
-		.describe("YouTube channel URL — accepts youtube.com/@handle or youtube.com/channel/UCxxx"),
+		.describe("YouTube channel URL. Accepts youtube.com/@handle or youtube.com/channel/UCxxx"),
 	tab: z
 		.enum(["video", "short", "playlist", "about"])
 		.optional()
