@@ -11,8 +11,13 @@
   ],
   "scripts": {
     "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node --minify && chmod +x ./dist/index.js",
+    "prepare": "bun run build",
+    "start": "node ./dist/index.js",
     "dev": "bun run ./src/index.ts",
     "check-types": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
@@ -33,6 +38,7 @@
     "transcript",
     "stophy"
   ],
+  "mcpName": "stophy",
   "license": "MIT",
   "homepage": "https://stophy.dev",
   "repository": {

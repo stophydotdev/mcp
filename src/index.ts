@@ -34,45 +34,53 @@ function wrap<T>(fn: ToolHandler<T>): ToolHandler<T> {
 	};
 }
 
+const readOnly = { readOnlyHint: true, destructiveHint: false };
+
 server.tool(
-	"search_videos",
-	"Search YouTube videos by keyword. Supports filtering by type, upload date, duration, and sort order. Returns video IDs, titles, descriptions, thumbnails, view counts, and channel info.",
+	"stophy_search_videos",
+	"Search YouTube videos by keyword. Supports filtering by type (video/channel/playlist), upload date, duration, and sort order. Returns video IDs, titles, descriptions, thumbnails, view counts, and channel info. Best for: discovering videos on a topic, finding recent uploads, exploring a subject. Not recommended for: fetching a specific video you already have the URL for — use stophy_get_video instead.",
 	searchSchema,
+	readOnly,
 	wrap(searchTool)
 );
 
 server.tool(
-	"get_video",
-	"Get details, transcript, and comments for a YouTube video. Transcript includes per-segment timestamps. Comments include author, text, likes, and replies.",
+	"stophy_get_video",
+	"Get details, transcript, or threaded comments for a YouTube video. Set type=\"details\" for title/description/stats, type=\"transcript\" for timestamped captions, type=\"comments\" for comments with author, text, likes, and replies. Paginate comments with continuationToken. Best for: extracting content from a known video URL. Not recommended for: discovering videos — use stophy_search_videos instead.",
 	videoSchema,
+	readOnly,
 	wrap(videoTool)
 );
 
 server.tool(
-	"get_channel",
-	"Get a YouTube channel's videos, shorts, playlists, or about info. Supports sorting by latest, popular, or oldest. Use continuationToken to paginate through results.",
+	"stophy_get_channel",
+	"Browse a YouTube channel's videos, shorts, playlists, or about page. Sort by latest, popular, or oldest. Paginate with continuationToken. Best for: auditing a creator's catalog, pulling all videos/shorts from a channel, reading channel description. Not recommended for: fetching a single known video — use stophy_get_video instead.",
 	channelSchema,
+	readOnly,
 	wrap(channelTool)
 );
 
 server.tool(
-	"get_playlist",
-	"Get all videos in a YouTube playlist. Returns full video metadata per item. Use continuationToken to paginate.",
+	"stophy_get_playlist",
+	"Get all videos in a YouTube playlist with full metadata per item. Paginate with continuationToken. Best for: processing curated collections, course playlists, or a channel's uploads playlist.",
 	playlistSchema,
+	readOnly,
 	wrap(playlistTool)
 );
 
 server.tool(
-	"get_suggestions",
-	"Get YouTube autocomplete suggestions for a partial query. Useful for query expansion and topic discovery.",
+	"stophy_get_suggestions",
+	"Get YouTube autocomplete suggestions for a partial search query. Supports language (hl) and country (gl) codes. Returns up to 10 suggestion strings. Best for: query expansion, topic discovery, and building search UIs.",
 	suggestSchema,
+	readOnly,
 	wrap(suggestTool)
 );
 
 server.tool(
-	"get_credits",
-	"Check your remaining Stophy API credit balance. One credit is consumed per request.",
+	"stophy_get_credits",
+	"Check your remaining Stophy API credit balance. One credit is consumed per request. Use before running large batch jobs to confirm you have enough credits.",
 	{},
+	readOnly,
 	wrap(creditsTool)
 );
 
