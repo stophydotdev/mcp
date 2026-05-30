@@ -2,9 +2,9 @@ import { z } from "zod";
 import { stophyFetch } from "../client.js";
 
 export const playlistSchema = {
-	playlistId: z
+	playlistUrl: z
 		.string()
-		.describe("YouTube playlist ID (the part after ?list= in the URL)"),
+		.describe("YouTube playlist URL (youtube.com/playlist?list=PLxxx)"),
 	continuationToken: z
 		.string()
 		.optional()
