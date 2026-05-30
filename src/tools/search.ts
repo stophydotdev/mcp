@@ -16,7 +16,7 @@ export const searchSchema = {
 		.optional()
 		.describe("short = under 4 min, medium = 4–20 min, long = over 20 min"),
 	sortBy: z
-		.enum(["relevance", "date", "viewCount", "rating"])
+		.enum(["relevance", "popularity", "date", "rating"])
 		.optional()
 		.describe("Sort order. Defaults to relevance"),
 	continuationToken: z

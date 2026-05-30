@@ -1,25 +1,29 @@
 # stophy-mcp
 
-MCP server for the [Stophy API](https://stophy.dev). Search, extract, and analyze YouTube for AI agents.
+MCP server for [Stophy](https://stophy.dev). Lets AI agents search YouTube, read transcripts, pull comments, browse channels, and fetch playlists — all as tool calls.
 
-## Tools
+## Quick start
 
-| Tool | Description |
-|------|-------------|
-| `stophy_search_videos` | Search YouTube by keyword with filters (type, date, duration, sort) |
-| `stophy_get_video` | Get details, transcript, or comments for a video URL |
-| `stophy_get_channel` | Browse a channel's videos, shorts, playlists, or about page |
-| `stophy_get_playlist` | Fetch all videos in a playlist with full metadata |
-| `stophy_get_suggestions` | Get autocomplete suggestions for a partial query |
-| `stophy_get_credits` | Check your remaining API credit balance |
+```bash
+env STOPHY_API_KEY=st_YOUR_API_KEY npx -y stophy-mcp
+```
+
+## What you get
+
+- Search YouTube with filters — type, date, duration, sort order
+- Video details, full transcripts with timestamps, threaded comments
+- Channel videos, shorts, playlists, and about info
+- Full playlist contents with metadata
+- Autocomplete suggestions for partial queries
+- One credit per request, credits never expire
 
 ## Setup
 
-Get an API key at [stophy.dev](https://stophy.dev).
+Get an API key at [stophy.dev/dashboard](https://stophy.dev/dashboard).
 
 ### Claude Desktop
 
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS, `%APPDATA%\Claude\claude_desktop_config.json` on Windows:
 
 ```json
 {
@@ -27,9 +31,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
     "stophy": {
       "command": "npx",
       "args": ["-y", "stophy-mcp"],
-      "env": {
-        "STOPHY_API_KEY": "your_api_key_here"
-      }
+      "env": { "STOPHY_API_KEY": "your_api_key_here" }
     }
   }
 }
@@ -37,7 +39,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 
 ### Cursor
 
-Add to `.cursor/mcp.json` in your project or `~/.cursor/mcp.json` globally:
+`.cursor/mcp.json` in your project, or `~/.cursor/mcp.json` globally:
 
 ```json
 {
@@ -45,9 +47,7 @@ Add to `.cursor/mcp.json` in your project or `~/.cursor/mcp.json` globally:
     "stophy": {
       "command": "npx",
       "args": ["-y", "stophy-mcp"],
-      "env": {
-        "STOPHY_API_KEY": "your_api_key_here"
-      }
+      "env": { "STOPHY_API_KEY": "your_api_key_here" }
     }
   }
 }
@@ -55,7 +55,7 @@ Add to `.cursor/mcp.json` in your project or `~/.cursor/mcp.json` globally:
 
 ### Windsurf
 
-Add to `~/.codeium/windsurf/mcp_config.json`:
+`~/.codeium/windsurf/mcp_config.json`:
 
 ```json
 {
@@ -63,159 +63,415 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
     "stophy": {
       "command": "npx",
       "args": ["-y", "stophy-mcp"],
-      "env": {
-        "STOPHY_API_KEY": "your_api_key_here"
-      }
+      "env": { "STOPHY_API_KEY": "your_api_key_here" }
     }
   }
 }
 ```
 
-## Response shapes
+## Tools
 
-### stophy_search_videos
+### 1. stophy_search_videos
 
-```ts
+Search YouTube by keyword. If you already have a video URL, use `stophy_get_video` instead.
+
+**Arguments:**
+
+- `q` (required): search query
+- `type`: `"video"` | `"short"` | `"channel"` | `"playlist"`
+- `uploadDate`: `"hour"` | `"today"` | `"week"` | `"month"` | `"year"`
+- `duration`: `"short"` (under 4 min) | `"medium"` (4–20 min) | `"long"` (over 20 min)
+- `sortBy`: `"relevance"` | `"popularity"` | `"date"` | `"rating"`
+- `continuationToken`: from the previous response to get the next page
+
+**Example:**
+
+> "Find TypeScript tutorials uploaded this week"
+
+```json
 {
-  items: Array<{
-    type: string
-    id: string
-    videoUrl: string
-    title: string
-    author: string | null
-    description: string | null
-    duration: string | null        // "12:34"
-    durationSec: number | null
-    viewCount: number | null
-    publishedAt: string | null     // ISO 8601
-    publishedAtText: string | null // "3 days ago"
-    isLive: boolean
-    thumbnails: Thumbnail[]
-  }>
-  continuationToken: string | null
-}
-```
-
-### stophy_get_video — type: "details"
-
-```ts
-{
-  video: {
-    id: string
-    title: string
-    author: string | null
-    description: string | null
-    viewCount: number
-    likeCount: number
-    durationSec: number
-    publishedAt: string | null  // ISO 8601
-    tags: string[]
-    isLive: boolean
-    thumbnails: Thumbnail[]
+  "name": "stophy_search_videos",
+  "arguments": {
+    "q": "typescript tutorial",
+    "uploadDate": "week",
+    "type": "video"
   }
-  related: Array<{ id, title, author, viewCount, durationSec, publishedAt, thumbnails }>
 }
 ```
 
-### stophy_get_video — type: "transcript"
+**Returns:**
 
-```ts
+```json
 {
-  videoId: string
-  language: { code: string | null, name: string | null, isAutoGenerated: boolean }
-  segments: Array<{ text: string, start: number, duration: number }>
-  text: string  // all segments joined
+  "items": [
+    {
+      "type": "video",
+      "id": "zxRUQ9foH5w",
+      "videoUrl": "https://youtube.com/watch?v=zxRUQ9foH5w",
+      "title": "Running JavaScript in TypeScript React",
+      "author": "Nexion Analytics",
+      "authorId": "UCxXINtcpzgN-DaUDLN3rUnQ",
+      "description": "Why does my TSX file throw errors when I import JavaScript?...",
+      "duration": "4:41",
+      "durationSec": 281,
+      "isLive": false,
+      "isUpcoming": false,
+      "isVerified": false,
+      "viewCount": 6,
+      "viewCountText": "6 Views",
+      "publishedAt": "2026-05-30T13:52:55.499Z",
+      "publishedAtText": "3 hours ago",
+      "thumbnails": [
+        { "url": "https://i.ytimg.com/vi/zxRUQ9foH5w/hq720.jpg?...", "width": 360, "height": 202 }
+      ]
+    }
+  ],
+  "continuationToken": "4qmFsgJ..."
 }
 ```
 
-### stophy_get_video — type: "comments"
+---
 
-```ts
+### 2. stophy_get_video
+
+Get details, transcript, or comments for a video. If you're looking for videos on a topic, use `stophy_search_videos` instead.
+
+**Arguments:**
+
+- `videoUrl` (required): YouTube video URL or ID
+- `type` (required): `"details"` | `"transcript"` | `"comments"`
+- `sortBy`: `"top"` | `"latest"` — for comments only
+- `continuationToken`: next page of comments, or a comment's `repliesToken` to fetch its replies
+
+**Examples:**
+
+> "Get the transcript of https://youtube.com/watch?v=d56mG7DezGs"
+
+> "What are people saying in the comments on https://youtube.com/watch?v=d56mG7DezGs?"
+
+```json
 {
-  videoId: string
-  sortBy: string
-  items: Array<{
-    id: string | null
-    text: string | null
-    author: string | null
-    likeCount: number | null
-    replyCount: number | null
-    repliesToken: string | null  // pass as continuationToken with type: "comments" to fetch replies
-    publishedAt: string | null
-    publishedAtText: string | null
-    isPinned: boolean
-    isChannelOwner: boolean
-  }>
-  continuationToken: string | null
-}
-```
-
-### stophy_get_channel
-
-```ts
-{
-  channel: {
-    id: string | null
-    name: string | null
-    handle: string | null
-    subscriberCount: string | null  // "10M subscribers"
-    videoCount: string | null
-    description: string | null
-    isVerified: boolean
-    thumbnails: Thumbnail[]
-    // about tab only:
-    country?: string
-    joinedDate?: string
-    viewCount?: string
-    links?: Array<{ title: string, url: string }>
+  "name": "stophy_get_video",
+  "arguments": {
+    "videoUrl": "https://youtube.com/watch?v=d56mG7DezGs",
+    "type": "transcript"
   }
-  tab: string
-  items: Array<{ id, videoUrl, title, author, publishedAt, thumbnails }>  // not on about tab
-  continuationToken: string | null  // not on about tab
 }
 ```
 
-### stophy_get_playlist
+**Returns (transcript):**
 
-```ts
+```json
 {
-  playlist: { id: string, title: string | null, author: string | null, thumbnails: Thumbnail[] } | null
-  items: Array<{ id, videoUrl, title, author, publishedAt, thumbnails }>
-  continuationToken: string | null
+  "videoId": "d56mG7DezGs",
+  "language": { "code": "en", "name": "en", "isAutoGenerated": true },
+  "segments": [
+    { "text": "welcome to the ultimate typescript", "start": 2.08, "duration": 3.6 },
+    { "text": "course in this course i'm going to teach", "start": 3.679, "duration": 3.281 },
+    { "text": "you everything you need to know about", "start": 5.68, "duration": 3.2 }
+  ],
+  "text": "welcome to the ultimate typescript course in this course i'm going to teach you everything you need to know about..."
 }
 ```
 
-### stophy_get_suggestions
+**Returns (details):**
 
-```ts
-{ q: string, hl: string, gl: string, suggestions: string[] }
+```json
+{
+  "video": {
+    "id": "d56mG7DezGs",
+    "videoUrl": "https://youtube.com/watch?v=d56mG7DezGs",
+    "title": "TypeScript Tutorial for Beginners",
+    "author": "Programming with Mosh",
+    "authorId": "UCWv7vMbMWH4-V0ZXdmDpPBA",
+    "description": "Write better, more scalable JavaScript with TypeScript!...",
+    "viewCount": 2063104,
+    "viewCountText": "2.1M Views",
+    "likeCount": 36608,
+    "likeCountText": "36.6K Likes",
+    "durationSec": 3868,
+    "durationText": "1 hour 4 minutes 28 seconds",
+    "publishedAt": "2022-05-23T13:00:18.000Z",
+    "tags": ["typescript tutorial", "learn typescript", "javascript"],
+    "isLive": false,
+    "category": "Education",
+    "thumbnails": [
+      { "url": "https://i.ytimg.com/vi/d56mG7DezGs/hqdefault.jpg?...", "width": 168, "height": 94 }
+    ]
+  },
+  "related": [...]
+}
 ```
 
-### stophy_get_credits
+**Returns (comments):**
 
-```ts
-{ credits: number }
+```json
+{
+  "videoId": "d56mG7DezGs",
+  "sortBy": "top",
+  "items": [
+    {
+      "id": "UgwfjLGxYnE9fEmwwxR4AaABAg",
+      "text": "This was honestly just the right amount of information and just the right length for a JS dev to sit and watch through and be ready to start using TS without having to dig too much into the docs.",
+      "author": "@Ramkatral",
+      "authorId": "UCsINZ_iznLG6wOeAwv2G28Q",
+      "authorThumbnail": "https://yt3.ggpht.com/...",
+      "isChannelOwner": false,
+      "isPinned": false,
+      "isVerified": false,
+      "publishedAt": "2024-05-30T16:52:47.784Z",
+      "publishedAtText": "2 years ago",
+      "likeCount": 145,
+      "likeCountText": "145 Likes",
+      "replyCount": 5,
+      "replyCountText": "5 Replies",
+      "repliesToken": "Eg0SC2Q1Nm1HN0RlekdzGA..."
+    }
+  ],
+  "continuationToken": "4qmFsgJ..."
+}
 ```
+
+To read replies on a comment, call this tool again with `type: "comments"` and `continuationToken` set to that comment's `repliesToken`.
+
+---
+
+### 3. stophy_get_channel
+
+Browse a channel's content. If you have a specific video URL, use `stophy_get_video` instead.
+
+**Arguments:**
+
+- `channelUrl` (required): `youtube.com/@handle` or `youtube.com/channel/UCxxx`
+- `tab`: `"video"` (default) | `"short"` | `"playlist"` | `"about"`
+- `sortBy`: `"latest"` | `"popular"` | `"oldest"` — video tab only
+- `continuationToken`: from the previous response to get the next page
+
+**Example:**
+
+> "Get the latest videos from https://youtube.com/@t3dotgg"
+
+```json
+{
+  "name": "stophy_get_channel",
+  "arguments": {
+    "channelUrl": "https://youtube.com/@t3dotgg",
+    "tab": "video",
+    "sortBy": "latest"
+  }
+}
+```
+
+**Returns:**
+
+```json
+{
+  "channel": {
+    "id": "UCbRP3c757lWg9M-U7TyEkXA",
+    "name": "Theo - t3.gg",
+    "handle": "@t3dotgg",
+    "channelUrl": "https://youtube.com/@t3dotgg",
+    "description": "Software dev, AI nerd, TypeScript sympathizer, creator of T3 Chat and the T3 Stack.",
+    "subscriberCount": "539K subscribers",
+    "videoCount": "1K videos",
+    "isVerified": true,
+    "thumbnails": [
+      { "url": "https://yt3.googleusercontent.com/...", "width": 72, "height": 72 }
+    ],
+    "banners": []
+  },
+  "tab": "video",
+  "items": [
+    {
+      "id": "_goOUJkkxUk",
+      "videoUrl": "https://youtube.com/watch?v=_goOUJkkxUk",
+      "title": "Anthropic fights back",
+      "author": "Theo - t3.gg",
+      "authorId": "UCbRP3c757lWg9M-U7TyEkXA",
+      "viewCount": 119000,
+      "viewCountText": "119K Views",
+      "duration": "28:03",
+      "durationSec": 1683,
+      "publishedAt": "2026-05-29T16:52:58.244Z",
+      "publishedAtText": "1 day ago",
+      "isLive": false,
+      "thumbnails": [
+        { "url": "https://i.ytimg.com/vi/_goOUJkkxUk/hqdefault.jpg?...", "width": 336, "height": 188 }
+      ]
+    }
+  ],
+  "continuationToken": "4qmFsgLdCBIYVUNiUlAzYzc1N2xXZz..."
+}
+```
+
+The `about` tab returns the full profile — `country`, `joinedDate`, `viewCount`, `links[]` — but no `items` or `continuationToken`.
+
+---
+
+### 4. stophy_get_playlist
+
+Get all videos in a playlist.
+
+**Arguments:**
+
+- `playlistUrl` (required): `youtube.com/playlist?list=PLxxx`
+- `continuationToken`: from the previous response to get the next page
+
+**Example:**
+
+> "List everything in this playlist: https://youtube.com/playlist?list=PLTjRvDozrdlxEIuOBZkMAK5uiqp8rHUax"
+
+```json
+{
+  "name": "stophy_get_playlist",
+  "arguments": {
+    "playlistUrl": "https://youtube.com/playlist?list=PLTjRvDozrdlxEIuOBZkMAK5uiqp8rHUax"
+  }
+}
+```
+
+**Returns:**
+
+```json
+{
+  "playlist": {
+    "id": "PLTjRvDozrdlxEIuOBZkMAK5uiqp8rHUax",
+    "playlistUrl": "https://youtube.com/playlist?list=PLTjRvDozrdlxEIuOBZkMAK5uiqp8rHUax",
+    "title": "JavaScript Tutorials",
+    "author": "Programming with Mosh",
+    "authorId": "UCWv7vMbMWH4-V0ZXdmDpPBA",
+    "videoCount": "25",
+    "thumbnails": [
+      { "url": "https://i.ytimg.com/vi/upDLs1sn7g4/hqdefault.jpg?...", "width": 336, "height": 188 }
+    ]
+  },
+  "items": [
+    {
+      "id": "upDLs1sn7g4",
+      "videoUrl": "https://youtube.com/watch?v=upDLs1sn7g4",
+      "title": "What is JavaScript?",
+      "author": null,
+      "authorId": null,
+      "duration": "5:12",
+      "durationSec": 312,
+      "index": 1,
+      "isLive": false,
+      "isPlayable": true,
+      "viewCount": 987000,
+      "viewCountText": "987K Views",
+      "publishedAt": "2018-06-01T16:53:01.440Z",
+      "publishedAtText": "8 years ago",
+      "thumbnails": [
+        { "url": "https://i.ytimg.com/vi/upDLs1sn7g4/hqdefault.jpg?...", "width": 336, "height": 188 }
+      ]
+    }
+  ],
+  "continuationToken": "4qmFsgJ..."
+}
+```
+
+---
+
+### 5. stophy_get_suggestions
+
+YouTube autocomplete for a partial query. Useful for expanding search terms or exploring a topic.
+
+**Arguments:**
+
+- `q` (required): partial query
+- `hl`: language code, e.g. `en`, `fr`. Defaults to `en`
+- `gl`: country code, e.g. `US`, `GB`. Defaults to `US`
+
+**Example:**
+
+> "What does YouTube suggest for 'react hooks'?"
+
+```json
+{
+  "name": "stophy_get_suggestions",
+  "arguments": { "q": "react hooks", "hl": "en", "gl": "US" }
+}
+```
+
+**Returns:**
+
+```json
+{
+  "q": "react hooks",
+  "hl": "en",
+  "gl": "US",
+  "suggestions": [
+    "react hooks",
+    "react hooks explained",
+    "react hooks tutorial",
+    "react hooks 2025",
+    "react hooks crash course",
+    "react hooks for beginners"
+  ]
+}
+```
+
+---
+
+### 6. stophy_get_credits
+
+Check your credit balance. Doesn't cost a credit.
+
+```json
+{
+  "name": "stophy_get_credits",
+  "arguments": {}
+}
+```
+
+**Returns:**
+
+```json
+{
+  "credits": 39152
+}
+```
+
+---
 
 ## Pagination
 
-Any tool that returns `continuationToken` can be paginated. Pass the token back as `continuationToken` in the next call with the same parameters to get the next page. A `null` token means there are no more pages.
+Any tool that returns `continuationToken` can be paged. Pass it back in the next call with the same arguments. When it's `null`, you're at the end.
 
-## Empty responses
+## When there's no data
 
-If a video has no transcript, a video has comments disabled, or similar, the response is a `200` with `data.empty`:
+If a video has no transcript, comments are turned off, or there are no replies, you get a `200` with `empty` instead of items:
 
 ```json
-{ "empty": { "code": "EMPTY_TRANSCRIPT_SEGMENTS", "message": "No transcript segments found." } }
+{
+  "empty": {
+    "code": "EMPTY_TRANSCRIPT_SEGMENTS",
+    "message": "No transcript segments found."
+  }
+}
 ```
 
-Empty codes: `EMPTY_TRANSCRIPT_SEGMENTS`, `EMPTY_COMMENTS`, `EMPTY_COMMENT_REPLIES`.
+Possible codes: `EMPTY_TRANSCRIPT_SEGMENTS`, `EMPTY_COMMENTS`, `EMPTY_COMMENT_REPLIES`.
 
-## Environment Variables
+## Errors
+
+Errors come back as plain text in the tool response:
+
+```
+Stophy error (UNAUTHORIZED): Invalid API key.
+```
+
+If you forgot to set `STOPHY_API_KEY`:
+
+```
+Stophy error (MISSING_API_KEY): STOPHY_API_KEY environment variable is not set. Get a key at https://stophy.dev/dashboard.
+```
+
+## Environment variables
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `STOPHY_API_KEY` | Yes | Your Stophy API key |
+| `STOPHY_API_KEY` | Yes | Your Stophy API key from stophy.dev/dashboard |
 
 ## License
 
