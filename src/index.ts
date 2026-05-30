@@ -38,7 +38,7 @@ const readOnly = { readOnlyHint: true, destructiveHint: false };
 
 server.tool(
 	"stophy_search_videos",
-	"Search YouTube videos by keyword. Supports filtering by type (video/channel/playlist), upload date, duration, and sort order. Returns video IDs, titles, descriptions, thumbnails, view counts, and channel info. Best for: discovering videos on a topic, finding recent uploads, exploring a subject. Not recommended for: fetching a specific video you already have the URL for — use stophy_get_video instead.",
+	"Search YouTube videos by keyword. Supports filtering by type (video/channel/playlist), upload date, duration, and sort order. Returns video IDs, titles, descriptions, thumbnails, view counts, and channel info. Best for: discovering videos on a topic, finding recent uploads, exploring a subject. Not recommended for: fetching a specific video you already have the URL for. Use stophy_get_video instead.",
 	searchSchema,
 	readOnly,
 	wrap(searchTool)
@@ -46,7 +46,7 @@ server.tool(
 
 server.tool(
 	"stophy_get_video",
-	"Get details, transcript, or threaded comments for a YouTube video. Set type=\"details\" for title/description/stats, type=\"transcript\" for timestamped captions, type=\"comments\" for comments with author, text, likes, and replies. Paginate comments with continuationToken. Best for: extracting content from a known video URL. Not recommended for: discovering videos — use stophy_search_videos instead.",
+	"Get details, transcript, or threaded comments for a YouTube video. Set type=\"details\" for title/description/stats, type=\"transcript\" for timestamped captions, type=\"comments\" for comments with author, text, likes, and replies. Paginate comments with continuationToken. Best for: extracting content from a known video URL. Not recommended for: discovering videos. Use stophy_search_videos instead.",
 	videoSchema,
 	readOnly,
 	wrap(videoTool)
@@ -54,7 +54,7 @@ server.tool(
 
 server.tool(
 	"stophy_get_channel",
-	"Browse a YouTube channel's videos, shorts, playlists, or about page. Sort by latest, popular, or oldest. Paginate with continuationToken. Best for: auditing a creator's catalog, pulling all videos/shorts from a channel, reading channel description. Not recommended for: fetching a single known video — use stophy_get_video instead.",
+	"Browse a YouTube channel's videos, shorts, playlists, or about page. Sort by latest, popular, or oldest. Paginate with continuationToken. Best for: auditing a creator's catalog, pulling all videos/shorts from a channel, reading channel description. Not recommended for: fetching a single known video. Use stophy_get_video instead.",
 	channelSchema,
 	readOnly,
 	wrap(channelTool)

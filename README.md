@@ -1,6 +1,6 @@
 # stophy-mcp
 
-MCP server for the [Stophy API](https://stophy.dev) — search, extract, and analyze YouTube for AI agents.
+MCP server for the [Stophy API](https://stophy.dev). Search, extract, and analyze YouTube for AI agents.
 
 ## Tools
 
