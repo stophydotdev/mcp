@@ -1,0 +1,42 @@
+{
+  "name": "stophy-mcp",
+  "version": "0.1.0",
+  "description": "Search, extract and analyze YouTube for AI agents",
+  "type": "module",
+  "bin": {
+    "stophy-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node --minify && chmod +x ./dist/index.js",
+    "dev": "bun run ./src/index.ts",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "youtube",
+    "ai",
+    "agents",
+    "transcript",
+    "stophy"
+  ],
+  "license": "MIT",
+  "homepage": "https://stophy.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stophydotdev/stophy-mcp"
+  }
+}
