@@ -11,6 +11,6 @@ startCommand:
   commandFunction: |-
     (config) => ({
       command: "npx",
-      args: ["-y", "stophy-mcp"],
+      args: ["-y", "@stophy/mcp"],
       env: { STOPHY_API_KEY: config.apiKey }
     })

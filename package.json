@@ -1,7 +1,7 @@
 {
-  "name": "stophy-mcp",
-  "version": "0.1.1",
-  "description": "Search, extract and analyze YouTube for AI agents",
+  "name": "@stophy/mcp",
+  "version": "1.0.0",
+  "description": "Stophy MCP is YouTube for AI Agents",
   "type": "module",
   "bin": {
     "stophy-mcp": "dist/index.js"
@@ -31,18 +31,21 @@
     "node": ">=18"
   },
   "keywords": [
+    "stophy",
     "mcp",
     "youtube",
-    "ai",
-    "agents",
+    "youtube-api",
+    "youtube-transcript",
+    "ai-agents",
+    "llm",
     "transcript",
-    "stophy"
+    "search"
   ],
   "mcpName": "stophy",
   "license": "MIT",
   "homepage": "https://stophy.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stophydotdev/stophy-mcp.git"
+    "url": "https://github.com/stophydotdev/mcp"
   }
 }
