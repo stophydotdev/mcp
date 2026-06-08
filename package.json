@@ -1,6 +1,6 @@
 {
   "name": "@stophy/mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stophy MCP is YouTube for AI Agents",
   "type": "module",
   "bin": {
@@ -11,16 +11,21 @@
   ],
   "scripts": {
     "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node --minify && chmod +x ./dist/index.js",
+    "build:http": "bun build ./src/http.ts --outfile ./dist/http.js --target node --minify",
     "prepare": "bun run build",
     "start": "node ./dist/index.js",
+    "start:http": "node ./dist/http.js",
     "dev": "bun run ./src/index.ts",
+    "dev:http": "bun run ./src/http.ts",
     "check-types": "tsc --noEmit"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
+    "@hono/node-server": "^2.0.4",
     "@modelcontextprotocol/sdk": "^1.29.0",
+    "hono": "^4.12.24",
     "zod": "^3.25.67"
   },
   "devDependencies": {

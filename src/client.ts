@@ -1,3 +1,5 @@
+import { apiKeyStore } from "./context.js";
+
 const BASE = "https://api.stophy.dev/v1";
 
 export class StophyError extends Error {
@@ -15,12 +17,12 @@ export async function stophyFetch<T>(
 	path: string,
 	body?: Record<string, unknown>
 ): Promise<T> {
-	const apiKey = process.env["STOPHY_API_KEY"];
+	const apiKey = apiKeyStore.getStore() ?? process.env["STOPHY_API_KEY"];
 	if (!apiKey) {
 		throw new StophyError(
 			0,
 			"MISSING_API_KEY",
-			"STOPHY_API_KEY environment variable is not set. Get a key at https://stophy.dev/dashboard."
+			"No Stophy API key provided. Set STOPHY_API_KEY (stdio) or include your key in the URL path (hosted). Get a key at https://stophy.dev/dashboard."
 		);
 	}
 

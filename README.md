@@ -2,10 +2,39 @@
 
 YouTube for AI Agents. Search, transcripts, comments, channels, playlists. All as MCP tool calls.
 
-## Quick start
+There are two ways to run it: connect to the **remote hosted server** (nothing to install), or run it **locally** over stdio.
+
+## Remote hosted URL
+
+No install. Point any MCP client that supports remote servers at:
+
+```
+https://mcp.stophy.dev/{STOPHY_API_KEY}/mcp
+```
+
+Your API key goes in the path. Example client config:
+
+```json
+{
+  "mcpServers": {
+    "stophy": {
+      "url": "https://mcp.stophy.dev/st_YOUR_API_KEY/mcp"
+    }
+  }
+}
+```
+
+## Quick start (local)
 
 ```bash
 env STOPHY_API_KEY=st_YOUR_API_KEY npx -y @stophy/mcp
+```
+
+### Manual installation
+
+```bash
+npm install -g @stophy/mcp
+env STOPHY_API_KEY=st_YOUR_API_KEY stophy-mcp
 ```
 
 ## Setup
@@ -351,14 +380,14 @@ Stophy error (UNAUTHORIZED): Invalid API key.
 ```
 
 ```
-Stophy error (MISSING_API_KEY): STOPHY_API_KEY environment variable is not set. Get a key at https://stophy.dev/dashboard.
+Stophy error (MISSING_API_KEY): No Stophy API key provided. Set STOPHY_API_KEY (stdio) or include your key in the URL path (hosted). Get a key at https://stophy.dev/dashboard.
 ```
 
 ## Environment variables
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `STOPHY_API_KEY` | Yes | Your Stophy API key from stophy.dev/dashboard |
+| `STOPHY_API_KEY` | stdio only | Your Stophy API key from stophy.dev/dashboard. Not needed for the hosted server, where the key comes from the URL path. |
 
 ## License
 

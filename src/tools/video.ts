@@ -4,7 +4,7 @@ import { stophyFetch } from "../client.js";
 export const videoSchema = {
 	videoUrl: z
 		.string()
-		.describe("YouTube video URL or ID (e.g. https://youtube.com/watch?v=dQw4w9WgXcQ)"),
+		.describe("YouTube video URL or ID (e.g. https://youtube.com/watch?v=VIDEO_ID)"),
 	type: z
 		.enum(["details", "transcript", "comments"])
 		.describe(
