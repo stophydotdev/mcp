@@ -53,7 +53,7 @@ export function createServer(): McpServer {
 
 	server.tool(
 		"stophy_get_channel",
-		"Browse a YouTube channel's content. Returns channel{id, name, handle, subscriberCount, videoCount, isVerified, thumbnails} on every tab. Video/short/playlist tabs also return items[{id, videoUrl, title, author, publishedAt, thumbnails}] and continuationToken. About tab returns the full profile including country, joinedDate, viewCount, and links[]. Best for: auditing a creator's catalog, pulling all videos from a channel, reading channel description. Not recommended for: fetching a single known video. Use stophy_get_video instead.",
+		"Browse a YouTube channel's content. Returns channel{id, name, handle, subscriberCount, videoCount, isVerified, thumbnails} on every tab. Video/short/playlist tabs also return items[{id, videoUrl, title, author, publishedAt, thumbnails}] and continuationToken. About tab returns the full profile including country, joinedDate, viewCount, and links[]. Best for: auditing a creator's catalog, reading channel videos, reading channel description. Not recommended for: fetching a single known video. Use stophy_get_video instead.",
 		channelSchema,
 		readOnly,
 		wrap(channelTool)
