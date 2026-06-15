@@ -1,7 +1,7 @@
 {
   "name": "@stophy/mcp",
-  "version": "1.0.3",
-  "description": "MCP server for Stophy. The API to search YouTube, get transcripts, read comments, and inspect channels.",
+  "version": "1.0.4",
+  "description": "YouTube data for AI agents. MCP server that gives AI agents YouTube transcripts, comments, search, and channels as structured JSON.",
   "type": "module",
   "bin": {
     "stophy-mcp": "dist/index.js"
@@ -38,15 +38,18 @@
   "keywords": [
     "stophy",
     "mcp",
+    "mcp-server",
     "youtube",
+    "youtube-data",
     "youtube-api",
-    "youtube-transcript", 
+    "youtube-transcript",
+    "ai-agent",
     "ai-agents",
+    "youtube-for-ai",
     "llm",
     "transcript",
     "search"
   ],
   "mcpName": "stophy",
   "homepage": "https://stophy.dev"
-  
 }

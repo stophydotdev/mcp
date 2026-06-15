@@ -1,23 +1,20 @@
 # @stophy/mcp
 
-MCP server for Stophy's YouTube API.
+YouTube data for AI agents. Transcripts, comments, search, channels, playlists — all as structured JSON through the Model Context Protocol.
 
-Use it to search YouTube, get transcripts, read comments, inspect channels, fetch playlists, get suggestions, and check credits from any MCP-compatible client.
+## How to connect
 
-You can connect in two ways:
+Two ways. Pick one.
 
-- **Hosted HTTP MCP**: no install; connect directly to Stophy's hosted MCP server.
-- **Local stdio MCP**: run `@stophy/mcp` locally with your API key in the environment.
+### Option 1: hosted HTTP (zero install)
 
-## Hosted HTTP MCP
+Give your MCP client this URL. Your API key goes in the path.
 
-Use the hosted endpoint when your MCP client supports remote HTTP servers:
-
-```text
+```
 https://mcp.stophy.dev/$STOPHY_API_KEY/mcp
 ```
 
-Example client config:
+MCP client config:
 
 ```json
 {
@@ -29,31 +26,34 @@ Example client config:
 }
 ```
 
-Your API key is included in the URL path. Get a key from [stophy.dev/dashboard](https://stophy.dev/dashboard).
+No install. No Node.js. Works anywhere that speaks HTTP MCP.
 
-## Local stdio MCP
+Get an API key at [stophy.dev/dashboard](https://stophy.dev/dashboard).
 
-Use the local server when your MCP client expects a command instead of a remote URL.
+### Option 2: run it locally (stdio)
+
+Your MCP client runs `@stophy/mcp` as a local process. The API key goes in the environment.
 
 ```bash
 env STOPHY_API_KEY=$STOPHY_API_KEY npx -y @stophy/mcp
 ```
 
-Manual installation:
+Or install it once:
 
 ```bash
 npm install -g @stophy/mcp
 env STOPHY_API_KEY=$STOPHY_API_KEY stophy-mcp
 ```
 
-## Client setup
+## Client configs
+
+Pick your MCP client.
 
 ### Claude Desktop
 
-Config file locations:
-
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+File: `claude_desktop_config.json`
+- macOS: `~/Library/Application Support/Claude/`
+- Windows: `%APPDATA%\Claude\`
 
 ```json
 {
@@ -69,17 +69,17 @@ Config file locations:
 }
 ```
 
-If Claude Desktop shows `spawn npx ENOENT`, Node.js is not installed or is not in your PATH. Install the LTS release from [nodejs.org](https://nodejs.org), then fully restart Claude Desktop.
+If Claude Desktop says `spawn npx ENOENT`, Node.js is missing from PATH. Install the LTS from [nodejs.org](https://nodejs.org) and restart Claude Desktop completely.
 
 ### Claude Code
 
-Local stdio server:
+Stdio:
 
 ```bash
 claude mcp add stophy -e STOPHY_API_KEY=$STOPHY_API_KEY -- npx -y @stophy/mcp
 ```
 
-Hosted HTTP server, if your Claude Code version supports remote HTTP MCP:
+HTTP (if your Claude Code version supports remote MCP):
 
 ```bash
 claude mcp add --transport http stophy https://mcp.stophy.dev/$STOPHY_API_KEY/mcp
@@ -87,7 +87,7 @@ claude mcp add --transport http stophy https://mcp.stophy.dev/$STOPHY_API_KEY/mc
 
 ### Cursor
 
-Add this to `.cursor/mcp.json` in your project or `~/.cursor/mcp.json` globally:
+File: `.cursor/mcp.json` (per project) or `~/.cursor/mcp.json` (global)
 
 ```json
 {
@@ -105,7 +105,7 @@ Add this to `.cursor/mcp.json` in your project or `~/.cursor/mcp.json` globally:
 
 ### Windsurf
 
-Add this to `~/.codeium/windsurf/mcp_config.json`:
+File: `~/.codeium/windsurf/mcp_config.json`
 
 ```json
 {
@@ -121,35 +121,49 @@ Add this to `~/.codeium/windsurf/mcp_config.json`:
 }
 ```
 
-## Tools
+### Hermes Agent
+
+Add to `config.yaml` under `mcp_servers`:
+
+```yaml
+mcp_servers:
+  - name: stophy
+    command: npx
+    args: ["-y", "@stophy/mcp"]
+    env:
+      STOPHY_API_KEY: your_api_key_here
+```
+
+### Any other MCP client
+
+If your client takes a command + args + env block, use the pattern above. If it takes a URL, use the hosted endpoint.
+
+## Available tools
+
+Six tools. Each call costs one credit except `stophy_get_credits` which is free.
 
 | Tool | What it does |
 |------|-------------|
-| `stophy_search_videos` | Search YouTube by keyword with optional filters |
-| `stophy_get_video` | Get video details, transcript, comments, or comment replies |
-| `stophy_get_channel` | Browse a channel's videos, Shorts, playlists, or about page |
-| `stophy_get_playlist` | Fetch videos in a playlist |
-| `stophy_get_suggestions` | Get YouTube autocomplete suggestions |
-| `stophy_get_credits` | Check remaining Stophy credits |
-
-Each tool call costs one credit. `stophy_get_credits` is free.
+| `stophy_search_videos` | Search YouTube by keyword. Returns videos, channels, playlists, or Shorts with pagination. |
+| `stophy_get_video` | Get details, transcript, comments, comment replies, or live chat for one video. |
+| `stophy_get_channel` | Browse a channel's videos, Shorts, playlists, or about page. |
+| `stophy_get_playlist` | Fetch every video in a playlist. |
+| `stophy_get_suggestions` | YouTube autocomplete for a partial query. |
+| `stophy_get_credits` | Your remaining credit balance. Free. |
 
 ## Tool reference
 
-### `stophy_search_videos`
+### stophy_search_videos
 
-Search YouTube by keyword. Use this when you need to discover videos, channels, playlists, or Shorts for a topic.
+Search YouTube. Use this to discover videos on a topic or find recent uploads. Not for fetching a specific video you already have the URL for — use `stophy_get_video` instead.
 
 Arguments:
-
-- `q` (required): search query
+- `q` (required): what to search for
 - `type`: `"video"`, `"short"`, `"channel"`, or `"playlist"`
 - `uploadDate`: `"hour"`, `"today"`, `"week"`, `"month"`, or `"year"`
 - `duration`: `"short"`, `"medium"`, or `"long"`
 - `sortBy`: `"relevance"`, `"popularity"`, `"date"`, or `"rating"`
-- `continuationToken`: token from a previous response for the next page
-
-Example:
+- `continuationToken`: token from previous response for the next page
 
 ```json
 {
@@ -159,20 +173,20 @@ Example:
 }
 ```
 
-Returns search results with `items[]` and an optional `continuationToken`.
+Returns `items[]` and an optional `continuationToken`.
 
-### `stophy_get_video`
+### stophy_get_video
 
-Get details, transcript, comments, or replies for a known YouTube video.
+Get details, transcript, comments, comment replies, or live chat for a known video.
 
 Arguments:
-
 - `videoUrl` (required): YouTube video URL or ID
-- `type` (required): `"details"`, `"transcript"`, or `"comments"`
+- `type` (required): `"details"`, `"transcript"`, `"comments"`, or `"livechat"`
 - `sortBy`: `"top"` or `"latest"` for comments
-- `continuationToken`: next comments page, or a comment `repliesToken` to fetch replies
+- `chatType`: `"top"` or `"live"` for live chat
+- `continuationToken`: next page of comments, or a comment's `repliesToken` for replies
 
-Transcript example:
+Transcript:
 
 ```json
 {
@@ -181,7 +195,7 @@ Transcript example:
 }
 ```
 
-Comments example:
+Comments:
 
 ```json
 {
@@ -191,20 +205,17 @@ Comments example:
 }
 ```
 
-To read replies, call `stophy_get_video` again with `type: "comments"` and set `continuationToken` to the comment's `repliesToken`.
+For comment replies, call again with `type: "comments"` and set `continuationToken` to the comment's `repliesToken`.
 
-### `stophy_get_channel`
+### stophy_get_channel
 
-Browse a channel's content or profile.
+Browse a channel.
 
 Arguments:
-
-- `channelUrl` (required): channel URL, handle, or channel ID
-- `tab`: `"video"`, `"short"`, `"playlist"`, or `"about"`; defaults to `"video"`
+- `channelUrl` (required): channel URL, handle (@username), or channel ID
+- `tab`: `"video"`, `"short"`, `"playlist"`, or `"about"` (default: `"video"`)
 - `sortBy`: `"latest"`, `"popular"`, or `"oldest"` for the video tab
-- `continuationToken`: token from a previous response for the next page
-
-Example:
+- `continuationToken`: next page
 
 ```json
 {
@@ -214,18 +225,15 @@ Example:
 }
 ```
 
-The `about` tab returns profile details such as country, joined date, view count, and links.
+The `about` tab returns the channel's country, join date, view count, and links.
 
-### `stophy_get_playlist`
+### stophy_get_playlist
 
-Fetch videos from a playlist.
+All videos in a playlist.
 
 Arguments:
-
 - `playlistUrl` (required): playlist URL or ID
-- `continuationToken`: token from a previous response for the next page
-
-Example:
+- `continuationToken`: next page
 
 ```json
 {
@@ -233,17 +241,14 @@ Example:
 }
 ```
 
-### `stophy_get_suggestions`
+### stophy_get_suggestions
 
-Get YouTube autocomplete suggestions for a partial query.
+YouTube autocomplete. Good for topic discovery and query expansion.
 
 Arguments:
-
 - `q` (required): partial query
-- `hl`: language code, for example `en`; defaults to `en`
-- `gl`: region code, for example `US`; defaults to `US`
-
-Example:
+- `hl`: language code, default `en`
+- `gl`: region code, default `US`
 
 ```json
 {
@@ -253,31 +258,14 @@ Example:
 }
 ```
 
-### `stophy_get_credits`
-
-Check your remaining credit balance. This tool does not consume a credit.
-
-Example:
-
-```json
-{}
-```
-
-Returns:
-
-```json
-{
-  "credits": 39152
-}
-```
 
 ## Pagination
 
-Tools that return `continuationToken` can be paged. Pass the token back in the next call with the same arguments. When the token is missing or `null`, there is no next page.
+Any tool that returns `continuationToken` supports pagination. Pass the token back with the same arguments to get the next page. A missing or null token means you've reached the end.
 
 ## Empty results
 
-If a video has no transcript, comments are turned off, or a comment has no replies, Stophy returns an `empty` object instead of items:
+When a video has no transcript, comments are off, or a comment has no replies, Stophy returns an `empty` object:
 
 ```json
 {
@@ -288,26 +276,22 @@ If a video has no transcript, comments are turned off, or a comment has no repli
 }
 ```
 
-Possible empty-result codes:
-
-- `EMPTY_TRANSCRIPT_SEGMENTS`
-- `EMPTY_COMMENTS`
-- `EMPTY_COMMENT_REPLIES`
+Possible codes: `EMPTY_TRANSCRIPT_SEGMENTS`, `EMPTY_COMMENTS`, `EMPTY_COMMENT_REPLIES`.
 
 ## Errors
 
-Errors are returned as text in the MCP tool response:
+Errors come back as text in the MCP tool response:
 
-```text
+```
 Stophy error (UNAUTHORIZED): Invalid API key.
 ```
 
-```text
+```
 Stophy error (MISSING_API_KEY): No Stophy API key provided. Set STOPHY_API_KEY (stdio) or include your key in the URL path (hosted). Get a key at https://stophy.dev/dashboard.
 ```
 
 ## Environment variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `STOPHY_API_KEY` | Local stdio only | Your Stophy API key. Not needed for the hosted endpoint because the key is included in the URL path. |
+| Variable | Required | What it is |
+|----------|----------|-----------|
+| `STOPHY_API_KEY` | Stdio only | Your Stophy API key. Not needed for hosted — the key is in the URL path. |
