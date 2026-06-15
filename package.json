@@ -1,6 +1,6 @@
 {
   "name": "@stophy/mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MCP server for Stophy. The API to search YouTube, get transcripts, read comments, and inspect channels.",
   "type": "module",
   "bin": {
@@ -47,7 +47,6 @@
     "search"
   ],
   "mcpName": "stophy",
-  "license": "MIT",
   "homepage": "https://stophy.dev"
   
 }

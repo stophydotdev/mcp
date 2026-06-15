@@ -14,7 +14,7 @@ You can connect in two ways:
 Use the hosted endpoint when your MCP client supports remote HTTP servers:
 
 ```text
-https://mcp.stophy.dev/st_YOUR_API_KEY/mcp
+https://mcp.stophy.dev/$STOPHY_API_KEY/mcp
 ```
 
 Example client config:
@@ -23,7 +23,7 @@ Example client config:
 {
   "mcpServers": {
     "stophy": {
-      "url": "https://mcp.stophy.dev/st_YOUR_API_KEY/mcp"
+      "url": "https://mcp.stophy.dev/$STOPHY_API_KEY/mcp"
     }
   }
 }
@@ -36,14 +36,14 @@ Your API key is included in the URL path. Get a key from [stophy.dev/dashboard](
 Use the local server when your MCP client expects a command instead of a remote URL.
 
 ```bash
-env STOPHY_API_KEY=st_YOUR_API_KEY npx -y @stophy/mcp
+env STOPHY_API_KEY=$STOPHY_API_KEY npx -y @stophy/mcp
 ```
 
 Manual installation:
 
 ```bash
 npm install -g @stophy/mcp
-env STOPHY_API_KEY=st_YOUR_API_KEY stophy-mcp
+env STOPHY_API_KEY=$STOPHY_API_KEY stophy-mcp
 ```
 
 ## Client setup
@@ -76,13 +76,13 @@ If Claude Desktop shows `spawn npx ENOENT`, Node.js is not installed or is not i
 Local stdio server:
 
 ```bash
-claude mcp add stophy -e STOPHY_API_KEY=your_api_key -- npx -y @stophy/mcp
+claude mcp add stophy -e STOPHY_API_KEY=$STOPHY_API_KEY -- npx -y @stophy/mcp
 ```
 
 Hosted HTTP server, if your Claude Code version supports remote HTTP MCP:
 
 ```bash
-claude mcp add --transport http stophy https://mcp.stophy.dev/st_YOUR_API_KEY/mcp
+claude mcp add --transport http stophy https://mcp.stophy.dev/$STOPHY_API_KEY/mcp
 ```
 
 ### Cursor
@@ -96,7 +96,7 @@ Add this to `.cursor/mcp.json` in your project or `~/.cursor/mcp.json` globally:
       "command": "npx",
       "args": ["-y", "@stophy/mcp"],
       "env": {
-        "STOPHY_API_KEY": "your_api_key_here"
+        "STOPHY_API_KEY": "$STOPHY_API_KEY"
       }
     }
   }
@@ -114,7 +114,7 @@ Add this to `~/.codeium/windsurf/mcp_config.json`:
       "command": "npx",
       "args": ["-y", "@stophy/mcp"],
       "env": {
-        "STOPHY_API_KEY": "your_api_key_here"
+        "STOPHY_API_KEY": "$STOPHY_API_KEY"
       }
     }
   }
@@ -311,7 +311,3 @@ Stophy error (MISSING_API_KEY): No Stophy API key provided. Set STOPHY_API_KEY (
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `STOPHY_API_KEY` | Local stdio only | Your Stophy API key. Not needed for the hosted endpoint because the key is included in the URL path. |
-
-## License
-
-MIT
