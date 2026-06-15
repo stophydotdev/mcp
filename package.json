@@ -1,6 +1,6 @@
 {
   "name": "@stophy/mcp",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "YouTube data for AI agents. MCP server that gives AI agents YouTube transcripts, comments, search, and channels as structured JSON.",
   "type": "module",
   "bin": {
