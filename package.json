@@ -1,7 +1,7 @@
 {
   "name": "@stophy/mcp",
   "version": "1.0.5",
-  "description": "YouTube data for AI agents. MCP server that gives AI agents YouTube transcripts, comments, search, and channels as structured JSON.",
+  "description": "YouTube context API for AI agents. MCP server that gives AI agents YouTube transcripts, comments, search, and channels as structured JSON.",
   "type": "module",
   "bin": {
     "stophy-mcp": "dist/index.js"
@@ -17,7 +17,9 @@
     "start:http": "node ./dist/http.js",
     "dev": "bun run ./src/index.ts",
     "dev:http": "bun run ./src/http.ts",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "changeset": "changeset",
+    "version": "changeset version"
   },
   "publishConfig": {
     "access": "public"
@@ -29,6 +31,7 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@types/node": "^22.0.0",
     "typescript": "^5.8.3"
   },
@@ -50,6 +53,6 @@
     "transcript",
     "search"
   ],
-  "mcpName": "stophy",
+  "mcpName": "io.github.stophydotdev/mcp",
   "homepage": "https://stophy.dev"
 }

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.stophydotdev/mcp",
+  "title": "Stophy MCP Server",
+  "description": "YouTube context API for AI agents: transcripts, comments, search, channels, and playlists as structured JSON.",
+  "version": "1.0.5",
+  "repository": {
+    "url": "https://github.com/stophydotdev/mcp.git",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@stophy/mcp",
+      "version": "1.0.5",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Your Stophy API key. Get one at https://stophy.dev/dashboard.",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "STOPHY_API_KEY"
+        }
+      ]
+    }
+  ]
+}
