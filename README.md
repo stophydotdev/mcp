@@ -1,6 +1,6 @@
 # @stophy/mcp
 
-YouTube data for AI agents. Transcripts, comments, search, channels, playlists — all as structured JSON through the Model Context Protocol.
+YouTube context API for AI agents. Transcripts, comments, search, channels, playlists: all as structured JSON through the Model Context Protocol.
 
 ## How to connect
 
@@ -155,7 +155,7 @@ Six tools. Each call costs one credit except `stophy_get_credits` which is free.
 
 ### stophy_search_videos
 
-Search YouTube. Use this to discover videos on a topic or find recent uploads. Not for fetching a specific video you already have the URL for — use `stophy_get_video` instead.
+Search YouTube. Use this to discover videos on a topic or find recent uploads. Not for fetching a specific video you already have the URL for; use `stophy_get_video` instead.
 
 Arguments:
 - `q` (required): what to search for
@@ -294,4 +294,4 @@ Stophy error (MISSING_API_KEY): No Stophy API key provided. Set STOPHY_API_KEY (
 
 | Variable | Required | What it is |
 |----------|----------|-----------|
-| `STOPHY_API_KEY` | Stdio only | Your Stophy API key. Not needed for hosted — the key is in the URL path. |
+| `STOPHY_API_KEY` | Stdio only | Your Stophy API key. Not needed for hosted; the key is in the URL path. |

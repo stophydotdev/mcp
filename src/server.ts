@@ -45,7 +45,7 @@ export function createServer(): McpServer {
 
 	server.tool(
 		"stophy_get_video",
-		"Get YouTube data for a specific video. type=\"details\": title, description, stats, tags, and related videos. type=\"transcript\": timestamped captions with language info and speaker segments. type=\"comments\": threaded comments with author, likes, and reply count — pass a comment's repliesToken as continuationToken to fetch its replies. type=\"livechat\": real-time chat from a live stream. Poll with continuationToken every pollIntervalMs until it returns null (stream ended). Set chatType=\"top\" for moderated chat or \"live\" for all messages. When discovering videos, use stophy_search_videos instead.",
+		"Get YouTube data for a specific video. type=\"details\": title, description, stats, tags, and related videos. type=\"transcript\": timestamped captions with language info and speaker segments. type=\"comments\": threaded comments with author, likes, and reply count; pass a comment's repliesToken as continuationToken to fetch its replies. type=\"livechat\": real-time chat from a live stream. Poll with continuationToken every pollIntervalMs until it returns null (stream ended). Set chatType=\"top\" for moderated chat or \"live\" for all messages. When discovering videos, use stophy_search_videos instead.",
 		videoSchema,
 		readOnly,
 		wrap(videoTool)
@@ -77,7 +77,7 @@ export function createServer(): McpServer {
 
 	server.tool(
 		"stophy_get_credits",
-		"Check your Stophy credit balance. Free — does not cost a credit. Returns remaining credits.",
+		"Check your Stophy credit balance. Free, does not cost a credit. Returns remaining credits.",
 		{},
 		readOnly,
 		wrap(creditsTool)
