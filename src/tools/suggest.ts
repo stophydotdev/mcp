@@ -8,9 +8,6 @@ export const suggestSchema = {
 };
 
 export async function suggestTool(args: z.infer<z.ZodObject<typeof suggestSchema>>) {
-	const params = new URLSearchParams({ q: args.q });
-	if (args.hl) params.set("hl", args.hl);
-	if (args.gl) params.set("gl", args.gl);
-	const data = await stophyFetch(`/suggest?${params.toString()}`);
+	const data = await stophyFetch("/suggest", args);
 	return { content: [{ type: "text" as const, text: JSON.stringify(data, null, 2) }] };
 }
