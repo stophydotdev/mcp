@@ -1,6 +1,6 @@
 # @stophy/mcp
 
-YouTube context API for AI agents. Transcripts, comments, search, channels, playlists: all as structured JSON through the Model Context Protocol.
+YouTube context API for AI agents. Transcripts, comments, search, channels, playlists, YouTube Music, and YouTube Kids: all as structured JSON through the Model Context Protocol.
 
 ## How to connect
 
@@ -140,7 +140,7 @@ If your client takes a command + args + env block, use the pattern above. If it 
 
 ## Available tools
 
-Six tools. Each call costs one credit except `stophy_get_credits` which is free.
+Eight tools. Each call costs one credit except `stophy_get_credits` which is free.
 
 | Tool | What it does |
 |------|-------------|
@@ -149,6 +149,8 @@ Six tools. Each call costs one credit except `stophy_get_credits` which is free.
 | `stophy_get_channel` | Browse a channel's videos, Shorts, playlists, or about page. |
 | `stophy_get_playlist` | Fetch every video in a playlist. |
 | `stophy_get_suggestions` | YouTube autocomplete for a partial query. |
+| `stophy_music` | Search YouTube Music or fetch music songs, lyrics, albums, artists, and playlists. |
+| `stophy_kids` | Search YouTube Kids or fetch Kids video metadata and related videos. |
 | `stophy_get_credits` | Your remaining credit balance. Free. |
 
 ## Tool reference
@@ -159,10 +161,11 @@ Search YouTube. Use this to discover videos on a topic or find recent uploads. N
 
 Arguments:
 - `q` (required): what to search for
-- `type`: `"video"`, `"short"`, `"channel"`, or `"playlist"`
-- `uploadDate`: `"hour"`, `"today"`, `"week"`, `"month"`, or `"year"`
+- `type`: `"video"`, `"short"`, `"channel"`, `"playlist"`, or `"movie"`
+- `uploadDate`: `"today"`, `"week"`, `"month"`, or `"year"`
 - `duration`: `"short"`, `"medium"`, or `"long"`
 - `sortBy`: `"relevance"`, `"popularity"`, `"date"`, or `"rating"`
+- `features`: array of feature filters such as `"live"`, `"hd"`, `"4k"`, or `"subtitles"`
 - `continuationToken`: token from previous response for the next page
 
 ```json
@@ -181,8 +184,9 @@ Get details, transcript, comments, comment replies, or live chat for a known vid
 
 Arguments:
 - `videoUrl` (required): YouTube video URL or ID
-- `type` (required): `"details"`, `"transcript"`, `"comments"`, or `"livechat"`
-- `sortBy`: `"top"` or `"latest"` for comments
+- `type` (required): `"details"`, `"transcript"`, `"comments"`, `"replies"`, or `"livechat"`
+- `sortBy`: `"top"`, `"latest"`, or `"any"` for comments
+- `lang`: transcript language code
 - `chatType`: `"top"` or `"live"` for live chat
 - `continuationToken`: next page of comments, or a comment's `repliesToken` for replies
 
@@ -205,7 +209,7 @@ Comments:
 }
 ```
 
-For comment replies, call again with `type: "comments"` and set `continuationToken` to the comment's `repliesToken`.
+For comment replies, call again with `type: "replies"` and set `continuationToken` to the comment's `repliesToken`.
 
 ### stophy_get_channel
 
@@ -213,7 +217,8 @@ Browse a channel.
 
 Arguments:
 - `channelUrl` (required): channel URL, handle (@username), or channel ID
-- `tab`: `"video"`, `"short"`, `"playlist"`, or `"about"` (default: `"video"`)
+- `query`: search within the channel; when provided, `tab` is ignored
+- `tab`: `"video"`, `"short"`, `"live"`, `"playlist"`, `"post"`, or `"about"` (default: `"video"`)
 - `sortBy`: `"latest"`, `"popular"`, or `"oldest"` for the video tab
 - `continuationToken`: next page
 
@@ -226,6 +231,45 @@ Arguments:
 ```
 
 The `about` tab returns the channel's country, join date, view count, and links.
+
+### stophy_music
+
+Search YouTube Music or fetch a known music resource.
+
+Arguments:
+- `type` (required): `"search"`, `"suggest"`, `"song"`, `"lyrics"`, `"album"`, `"artist"`, or `"playlist"`
+- `q`: required for `"search"` and `"suggest"`
+- `searchType`: for `"search"`, one of `"song"`, `"video"`, `"album"`, `"artist"`, `"playlist"`, `"podcast"`, `"episode"`, or `"profile"`
+- `videoUrl`: required for `"song"` and `"lyrics"`
+- `albumUrl`: required for `"album"`
+- `artistUrl`: required for `"artist"`
+- `playlistUrl`: required for `"playlist"`
+- `continuationToken`: next page for music search or playlist tracks
+
+```json
+{
+  "type": "search",
+  "q": "lofi",
+  "searchType": "song"
+}
+```
+
+### stophy_kids
+
+Search YouTube Kids or fetch YouTube Kids video metadata.
+
+Arguments:
+- `type` (required): `"search"` or `"video"`
+- `q`: required for `"search"`
+- `videoUrl`: required for `"video"`
+- `continuationToken`: next page for search
+
+```json
+{
+  "type": "search",
+  "q": "science"
+}
+```
 
 ### stophy_get_playlist
 
