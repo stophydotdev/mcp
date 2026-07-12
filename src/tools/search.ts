@@ -4,11 +4,11 @@ import { stophyFetch } from "../client.js";
 export const searchSchema = {
 	q: z.string().describe("Search query"),
 	type: z
-		.enum(["video", "channel", "playlist", "short"])
+		.enum(["video", "short", "channel", "playlist", "movie"])
 		.optional()
 		.describe("Filter by content type"),
 	uploadDate: z
-		.enum(["hour", "today", "week", "month", "year"])
+		.enum(["today", "week", "month", "year"])
 		.optional()
 		.describe("Filter by upload date"),
 	duration: z
@@ -19,6 +19,24 @@ export const searchSchema = {
 		.enum(["relevance", "popularity", "date", "rating"])
 		.optional()
 		.describe("Sort order. Defaults to relevance"),
+	features: z
+		.array(
+			z.enum([
+				"live",
+				"4k",
+				"hd",
+				"subtitles",
+				"creativeCommons",
+				"360",
+				"vr180",
+				"3d",
+				"hdr",
+				"location",
+				"purchased",
+			])
+		)
+		.optional()
+		.describe("Optional YouTube feature filters"),
 	continuationToken: z
 		.string()
 		.optional()
