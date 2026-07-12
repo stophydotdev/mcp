@@ -4,16 +4,21 @@ import { stophyFetch } from "../client.js";
 export const videoSchema = {
 	videoUrl: z
 		.string()
+		.optional()
 		.describe("YouTube video URL or ID (e.g. https://youtube.com/watch?v=VIDEO_ID)"),
 	type: z
-		.enum(["details", "transcript", "comments", "livechat"])
+		.enum(["details", "transcript", "comments", "replies", "livechat"])
 		.describe(
-			"What to fetch: details = title/description/stats, transcript = timestamped captions, comments = threaded comments, livechat = live stream chat messages + status"
+			"What to fetch: details = title/description/stats, transcript = timestamped captions, comments = threaded comments, replies = comment replies from continuationToken, livechat = live stream chat messages + status"
 		),
 	sortBy: z
-		.enum(["latest", "top"])
+		.enum(["any", "latest", "top"])
 		.optional()
 		.describe("Sort order for comments. Defaults to top"),
+	lang: z
+		.string()
+		.optional()
+		.describe("Transcript language code, e.g. en. Used only for type=transcript"),
 	chatType: z
 		.enum(["top", "live"])
 		.optional()
