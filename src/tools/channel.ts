@@ -5,8 +5,21 @@ export const channelSchema = {
 	channelUrl: z
 		.string()
 		.describe("YouTube channel URL. Accepts youtube.com/@handle or youtube.com/channel/UCxxx"),
+	query: z
+		.string()
+		.optional()
+		.describe("Search query within the channel. When provided, tab is ignored"),
 	tab: z
-		.enum(["video", "short", "playlist", "about"])
+		.enum([
+			"video",
+			"short",
+			"live",
+			"playlist",
+			"post",
+			"community",
+			"course",
+			"about",
+		])
 		.optional()
 		.describe("Which tab to fetch. Defaults to video"),
 	sortBy: z
