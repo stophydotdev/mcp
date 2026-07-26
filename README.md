@@ -165,6 +165,7 @@ Arguments:
 - `uploadDate`: `"today"`, `"week"`, `"month"`, or `"year"`
 - `duration`: `"short"`, `"medium"`, or `"long"`
 - `sortBy`: `"relevance"`, `"popularity"`, `"date"`, or `"rating"`
+- `features`: array of `"live"`, `"4k"`, `"hd"`, `"subtitles"`, `"creativeCommons"`, `"360"`, `"vr180"`, `"3d"`, `"hdr"`, `"location"`, or `"purchased"`
 - `continuationToken`: token from previous response for the next page
 
 ```json
@@ -183,7 +184,7 @@ Get details, transcript, comments, comment replies, or live chat for a known vid
 
 Arguments:
 - `videoUrl` (required): YouTube video URL or ID
-- `type` (required): `"details"`, `"transcript"`, `"comments"`, or `"livechat"`
+- `type` (required): `"details"`, `"transcript"`, `"comments"`, `"replies"`, or `"livechat"`
 - `sortBy`: `"top"` or `"latest"` for comments
 - `chatType`: `"top"` or `"live"` for live chat
 - `continuationToken`: next page of comments, or a comment's `repliesToken` for replies
@@ -215,8 +216,9 @@ Browse a channel.
 
 Arguments:
 - `channelUrl` (required): channel URL, handle (@username), or channel ID
-- `tab`: `"video"`, `"short"`, `"playlist"`, or `"about"` (default: `"video"`)
+- `tab`: `"video"`, `"short"`, `"live"`, `"playlist"`, `"post"`, `"community"`, `"course"`, or `"about"` (default: `"video"`)
 - `sortBy`: `"latest"`, `"popular"`, or `"oldest"` for the video tab
+- `query`: search within the channel; this ignores `tab`
 - `continuationToken`: next page
 
 ```json

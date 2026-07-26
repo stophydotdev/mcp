@@ -40,7 +40,7 @@ export function createServer(): McpServer {
 
 	server.tool(
 		"stophy_search_videos",
-		"Search YouTube for videos, channels, playlists, or Shorts. Filter by upload date, duration, and sort order. Returns items with title, author, view count, duration, and publish date. Paginate with continuationToken. When you already have a video URL, use stophy_get_video instead.",
+		"Search YouTube for videos, channels, playlists, Shorts, or movies. Filter by upload date, duration, sort order, and features such as live, 4K, HD, and subtitles. Returns items with title, author, view count, duration, and publish date. Paginate with continuationToken. When you already have a video URL, use stophy_get_video instead.",
 		searchSchema,
 		readOnly,
 		wrap(searchTool)
@@ -72,7 +72,7 @@ export function createServer(): McpServer {
 
 	server.tool(
 		"stophy_get_channel",
-		"Browse a YouTube channel. Every tab returns channel info (name, handle, subscriber count, video count). tab=\"video\", \"short\", or \"playlist\" lists content with pagination. tab=\"about\" returns the full profile: country, join date, total views, and links. When you have a specific video URL, use stophy_get_video instead.",
+		"Browse a YouTube channel. Every tab returns channel info (name, handle, subscriber count, video count). tab=\"video\", \"short\", \"live\", \"playlist\", \"post\", \"community\", or \"course\" lists content with pagination; tab=\"about\" returns the full profile. Use query to search within the channel. When you have a specific video URL, use stophy_get_video instead.",
 		channelSchema,
 		readOnly,
 		wrap(channelTool)

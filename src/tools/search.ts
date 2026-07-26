@@ -26,7 +26,9 @@ export const searchSchema = {
 	features: z
 		.array(z.enum(["live", "4k", "hd", "subtitles", "creativeCommons", "360", "vr180", "3d", "hdr", "location", "purchased"]))
 		.optional()
-		.describe("Optional YouTube feature filters"),
+		.describe(
+			"Optional YouTube feature filters: live, 4k, hd, subtitles, creativeCommons, 360, vr180, 3d, hdr, location, or purchased"
+		),
 };
 
 export async function searchTool(args: z.infer<z.ZodObject<typeof searchSchema>>) {

@@ -8,12 +8,14 @@ export const channelSchema = {
 	tab: z
 		.enum(["video", "short", "live", "playlist", "post", "community", "course", "about"])
 		.optional()
-		.describe("Which tab to fetch. Defaults to video"),
+		.describe(
+			"Which tab to fetch: video, short, live, playlist, post, community, course, or about. Defaults to video"
+		),
 	sortBy: z
 		.enum(["latest", "popular", "oldest"])
 		.optional()
 		.describe("Sort order for the video tab"),
-	query: z.string().optional().describe("Search within the channel"),
+	query: z.string().optional().describe("Search within the channel; ignores tab"),
 	continuationToken: z
 		.string()
 		.optional()
