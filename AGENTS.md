@@ -46,7 +46,7 @@ CLAUDE.md         # @AGENTS.md (cross-agent include)
 
 ## Current tools
 
-Six tools, registered in `src/server.ts`. Each call costs one credit except `stophy_get_credits`, which is free.
+Eight tools, registered in `src/server.ts`. Search costs 5 credits, video details cost 2, other data tools cost 1, and `stophy_get_credits` is free.
 
 | Tool | API path | Purpose |
 |------|----------|---------|
@@ -55,6 +55,8 @@ Six tools, registered in `src/server.ts`. Each call costs one credit except `sto
 | `stophy_get_channel` | `/channel` | Browse a channel's videos, Shorts, playlists, or about page. |
 | `stophy_get_playlist` | `/playlist` | Every video in a playlist. |
 | `stophy_get_suggestions` | `/suggest` | YouTube autocomplete for a partial query. |
+| `stophy_music` | `/music` | YouTube Music search, metadata, lyrics, albums, artists, and playlists. |
+| `stophy_kids` | `/kids` | YouTube Kids search and video metadata. |
 | `stophy_get_credits` | `/credits` | Remaining credit balance. Free. |
 
 ## Adding a tool

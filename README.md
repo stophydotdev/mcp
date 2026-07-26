@@ -140,7 +140,7 @@ If your client takes a command + args + env block, use the pattern above. If it 
 
 ## Available tools
 
-Six tools. Each call costs one credit except `stophy_get_credits` which is free.
+Eight tools. Search costs 5 credits, video details cost 2, other data tools cost 1, and `stophy_get_credits` is free.
 
 | Tool | What it does |
 |------|-------------|
@@ -149,6 +149,8 @@ Six tools. Each call costs one credit except `stophy_get_credits` which is free.
 | `stophy_get_channel` | Browse a channel's videos, Shorts, playlists, or about page. |
 | `stophy_get_playlist` | Fetch every video in a playlist. |
 | `stophy_get_suggestions` | YouTube autocomplete for a partial query. |
+| `stophy_music` | Search YouTube Music or fetch songs, lyrics, albums, artists, and playlists. |
+| `stophy_kids` | Search YouTube Kids or fetch a Kids video. |
 | `stophy_get_credits` | Your remaining credit balance. Free. |
 
 ## Tool reference
@@ -160,7 +162,7 @@ Search YouTube. Use this to discover videos on a topic or find recent uploads. N
 Arguments:
 - `q` (required): what to search for
 - `type`: `"video"`, `"short"`, `"channel"`, or `"playlist"`
-- `uploadDate`: `"hour"`, `"today"`, `"week"`, `"month"`, or `"year"`
+- `uploadDate`: `"today"`, `"week"`, `"month"`, or `"year"`
 - `duration`: `"short"`, `"medium"`, or `"long"`
 - `sortBy`: `"relevance"`, `"popularity"`, `"date"`, or `"rating"`
 - `continuationToken`: token from previous response for the next page
@@ -205,7 +207,7 @@ Comments:
 }
 ```
 
-For comment replies, call again with `type: "comments"` and set `continuationToken` to the comment's `repliesToken`.
+For comment replies, call again with `type: "replies"` and set `continuationToken` to the comment's `repliesToken`.
 
 ### stophy_get_channel
 
@@ -255,6 +257,29 @@ Arguments:
   "q": "react hooks",
   "hl": "en",
   "gl": "US"
+}
+```
+
+### stophy_music
+
+Search YouTube Music or fetch its richer resources. Set `type` to `"search"`, `"suggest"`, `"song"`, `"lyrics"`, `"album"`, `"artist"`, or `"playlist"`; provide the matching query or URL argument.
+
+```json
+{
+  "type": "search",
+  "q": "lofi beats",
+  "searchType": "song"
+}
+```
+
+### stophy_kids
+
+Use the YouTube Kids surface. Set `type` to `"search"` with `q`, or `"video"` with `videoUrl`.
+
+```json
+{
+  "type": "search",
+  "q": "science"
 }
 ```
 
