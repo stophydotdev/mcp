@@ -8,7 +8,7 @@ export const videoSchema = {
 	type: z
 		.enum(["details", "transcript", "comments", "replies", "livechat"])
 		.describe(
-			"What to fetch: details = title/description/stats, transcript = timestamped captions, comments = threaded comments, livechat = live stream chat messages + status"
+			"What to fetch: details = title/description/stats, transcript = timestamped captions, comments = threaded comments, replies = replies for a comment (requires continuationToken), livechat = live stream chat messages + status"
 		),
 	sortBy: z
 		.enum(["latest", "top"])
@@ -24,7 +24,7 @@ export const videoSchema = {
 		.string()
 		.optional()
 		.describe(
-			"Pagination token. For comments, pass a previous comments response token. For livechat, pass the continuationToken from a previous livechat response to poll for new messages."
+			"Pagination token. For comments, pass a previous comments response token. For replies, pass a comment's repliesToken with type='replies'. For livechat, pass the continuationToken from a previous livechat response to poll for new messages."
 		),
 };
 

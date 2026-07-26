@@ -55,8 +55,8 @@ Eight tools, registered in `src/server.ts`. Search costs 5 credits, video detail
 | `stophy_get_channel` | `/channel` | Browse a channel's videos, Shorts, playlists, or about page. |
 | `stophy_get_playlist` | `/playlist` | Every video in a playlist. |
 | `stophy_get_suggestions` | `/suggest` | YouTube autocomplete for a partial query. |
-| `stophy_music` | `/music` | YouTube Music search, metadata, lyrics, albums, artists, and playlists. |
-| `stophy_kids` | `/kids` | YouTube Kids search and video metadata. |
+| `stophy_query_music` | `/music` | YouTube Music search, metadata, lyrics, albums, artists, and playlists. |
+| `stophy_query_kids` | `/kids` | YouTube Kids search and video metadata. |
 | `stophy_get_credits` | `/credits` | Remaining credit balance. Free. |
 
 ## Adding a tool

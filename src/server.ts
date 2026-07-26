@@ -47,7 +47,7 @@ export function createServer(): McpServer {
 	);
 
 	server.tool(
-		"stophy_music",
+		"stophy_query_music",
 		"Search YouTube Music or fetch suggestions, songs, lyrics, albums, artists, and playlists.",
 		musicSchema,
 		readOnly,
@@ -55,7 +55,7 @@ export function createServer(): McpServer {
 	);
 
 	server.tool(
-		"stophy_kids",
+		"stophy_query_kids",
 		"Search YouTube Kids or fetch Kids video metadata and related videos.",
 		kidsSchema,
 		readOnly,
@@ -64,7 +64,7 @@ export function createServer(): McpServer {
 
 	server.tool(
 		"stophy_get_video",
-		"Get YouTube data for a specific video. type=\"details\": title, description, stats, tags, and related videos. type=\"transcript\": timestamped captions with language info and speaker segments. type=\"comments\": threaded comments with author, likes, and reply count; pass a comment's repliesToken as continuationToken to fetch its replies. type=\"livechat\": real-time chat from a live stream. Poll with continuationToken every pollIntervalMs until it returns null (stream ended). Set chatType=\"top\" for moderated chat or \"live\" for all messages. When discovering videos, use stophy_search_videos instead.",
+		"Get YouTube data for a specific video. type=\"details\": title, description, stats, tags, and related videos. type=\"transcript\": timestamped captions with language info and speaker segments. type=\"comments\": threaded comments with author, likes, and reply count. type=\"replies\": pass a comment's repliesToken as continuationToken to fetch that comment's replies. type=\"livechat\": real-time chat from a live stream. Poll with continuationToken every pollIntervalMs until it returns null (stream ended). Set chatType=\"top\" for moderated chat or \"live\" for all messages. When discovering videos, use stophy_search_videos instead.",
 		videoSchema,
 		readOnly,
 		wrap(videoTool)

@@ -149,8 +149,8 @@ Eight tools. Search costs 5 credits, video details cost 2, other data tools cost
 | `stophy_get_channel` | Browse a channel's videos, Shorts, playlists, or about page. |
 | `stophy_get_playlist` | Fetch every video in a playlist. |
 | `stophy_get_suggestions` | YouTube autocomplete for a partial query. |
-| `stophy_music` | Search YouTube Music or fetch songs, lyrics, albums, artists, and playlists. |
-| `stophy_kids` | Search YouTube Kids or fetch a Kids video. |
+| `stophy_query_music` | Search YouTube Music or fetch songs, lyrics, albums, artists, and playlists. |
+| `stophy_query_kids` | Search YouTube Kids or fetch a Kids video. |
 | `stophy_get_credits` | Your remaining credit balance. Free. |
 
 ## Tool reference
@@ -260,7 +260,7 @@ Arguments:
 }
 ```
 
-### stophy_music
+### stophy_query_music
 
 Search YouTube Music or fetch its richer resources. Set `type` to `"search"`, `"suggest"`, `"song"`, `"lyrics"`, `"album"`, `"artist"`, or `"playlist"`; provide the matching query or URL argument.
 
@@ -272,7 +272,7 @@ Search YouTube Music or fetch its richer resources. Set `type` to `"search"`, `"
 }
 ```
 
-### stophy_kids
+### stophy_query_kids
 
 Use the YouTube Kids surface. Set `type` to `"search"` with `q`, or `"video"` with `videoUrl`.
 
