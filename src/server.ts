@@ -2,6 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StophyError } from "./client.js";
 import { channelSchema, channelTool } from "./tools/channel.js";
 import { creditsTool } from "./tools/credits.js";
+
+import { kidsSchema, kidsTool } from "./tools/kids.js";
+import { musicSchema, musicTool } from "./tools/music.js";
 import { playlistSchema, playlistTool } from "./tools/playlist.js";
 import { searchSchema, searchTool } from "./tools/search.js";
 import { suggestSchema, suggestTool } from "./tools/suggest.js";
@@ -41,6 +44,22 @@ export function createServer(): McpServer {
 		searchSchema,
 		readOnly,
 		wrap(searchTool)
+	);
+
+	server.tool(
+		"stophy_music",
+		"Search YouTube Music or fetch suggestions, songs, lyrics, albums, artists, and playlists.",
+		musicSchema,
+		readOnly,
+		wrap(musicTool)
+	);
+
+	server.tool(
+		"stophy_kids",
+		"Search YouTube Kids or fetch Kids video metadata and related videos.",
+		kidsSchema,
+		readOnly,
+		wrap(kidsTool)
 	);
 
 	server.tool(

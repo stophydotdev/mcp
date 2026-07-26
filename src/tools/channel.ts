@@ -6,13 +6,14 @@ export const channelSchema = {
 		.string()
 		.describe("YouTube channel URL. Accepts youtube.com/@handle or youtube.com/channel/UCxxx"),
 	tab: z
-		.enum(["video", "short", "playlist", "about"])
+		.enum(["video", "short", "live", "playlist", "post", "community", "course", "about"])
 		.optional()
 		.describe("Which tab to fetch. Defaults to video"),
 	sortBy: z
 		.enum(["latest", "popular", "oldest"])
 		.optional()
 		.describe("Sort order for the video tab"),
+	query: z.string().optional().describe("Search within the channel"),
 	continuationToken: z
 		.string()
 		.optional()

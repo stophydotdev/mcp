@@ -6,7 +6,7 @@ export const videoSchema = {
 		.string()
 		.describe("YouTube video URL or ID (e.g. https://youtube.com/watch?v=VIDEO_ID)"),
 	type: z
-		.enum(["details", "transcript", "comments", "livechat"])
+		.enum(["details", "transcript", "comments", "replies", "livechat"])
 		.describe(
 			"What to fetch: details = title/description/stats, transcript = timestamped captions, comments = threaded comments, livechat = live stream chat messages + status"
 		),

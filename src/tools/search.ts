@@ -4,11 +4,11 @@ import { stophyFetch } from "../client.js";
 export const searchSchema = {
 	q: z.string().describe("Search query"),
 	type: z
-		.enum(["video", "channel", "playlist", "short"])
+		.enum(["video", "channel", "playlist", "short", "movie"])
 		.optional()
 		.describe("Filter by content type"),
 	uploadDate: z
-		.enum(["hour", "today", "week", "month", "year"])
+		.enum(["today", "week", "month", "year"])
 		.optional()
 		.describe("Filter by upload date"),
 	duration: z
@@ -23,6 +23,10 @@ export const searchSchema = {
 		.string()
 		.optional()
 		.describe("Pagination token from a previous search response"),
+	features: z
+		.array(z.enum(["live", "4k", "hd", "subtitles", "creativeCommons", "360", "vr180", "3d", "hdr", "location", "purchased"]))
+		.optional()
+		.describe("Optional YouTube feature filters"),
 };
 
 export async function searchTool(args: z.infer<z.ZodObject<typeof searchSchema>>) {
