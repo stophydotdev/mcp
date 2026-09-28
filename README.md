@@ -1,6 +1,6 @@
 # Stophy MCP
 
-[![smithery badge](https://smithery.ai/badge/stophy/stophy)](https://smithery.ai/servers/stophy/stophy)
+[![smithery badge](https://smithery.ai/badge/stophy/mcp)](https://smithery.ai/servers/stophy/mcp)
 
 Give your AI agent public web data: web search, YouTube, Reddit, TikTok, Instagram, LinkedIn, maps, shopping, jobs, real estate, finance, and more. Your agent reaches every Stophy endpoint through three MCP tools.
 
