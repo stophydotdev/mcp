@@ -1,6 +1,6 @@
 # Stophy MCP
 
-Give your AI agent public web data: web search, YouTube, Reddit, TikTok, Instagram, LinkedIn, maps, shopping, jobs, real estate, finance, and more. Stophy has 161 endpoints across 41 sources, and your agent reaches all of them through three MCP tools.
+Give your AI agent public web data: web search, YouTube, Reddit, TikTok, Instagram, LinkedIn, maps, shopping, jobs, real estate, finance, and more. Your agent reaches every Stophy endpoint through three MCP tools.
 
 ## Connect to the hosted server
 
@@ -8,7 +8,7 @@ Most apps can connect to the hosted server directly. There is nothing to install
 
 | URL | How you connect | What your agent can use |
 | --- | --- | --- |
-| `https://api.stophy.dev/mcp` | No key | The free tools: web search, YouTube search, and YouTube transcripts |
+| `https://api.stophy.dev/mcp` | No key | The free endpoints: web search, YouTube search, and YouTube transcripts |
 | `https://api.stophy.dev/mcp` | `Authorization: Bearer <key>` header | Every endpoint |
 | `https://api.stophy.dev/mcp-oauth` | Sign in with your browser | Every endpoint |
 
@@ -74,7 +74,7 @@ Some apps can only start a local MCP server. For those, use this package. It run
 npx -y @stophy/mcp
 ```
 
-With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent gets the free tools.
+With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent gets the free endpoints.
 
 ### Claude Desktop
 
