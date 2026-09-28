@@ -54,5 +54,13 @@
     "search"
   ],
   "mcpName": "io.github.stophydotdev/mcp",
-  "homepage": "https://stophy.dev"
+  "homepage": "https://stophy.dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stophydotdev/mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stophydotdev/mcp/issues"
+  }
 }
