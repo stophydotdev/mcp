@@ -1,6 +1,6 @@
 {
   "name": "@stophy/mcp",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Public web data for AI agents. Connects your MCP app to the hosted Stophy server.",
   "type": "module",
   "bin": {
