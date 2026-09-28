@@ -1,7 +1,7 @@
 {
   "name": "@stophy/mcp",
   "version": "1.0.5",
-  "description": "YouTube context API for AI agents. MCP server that gives AI agents YouTube transcripts, comments, search, and channels as structured JSON.",
+  "description": "Public web data for AI agents. Connects your MCP app to the hosted Stophy server.",
   "type": "module",
   "bin": {
     "stophy-mcp": "dist/index.js"
@@ -11,12 +11,9 @@
   ],
   "scripts": {
     "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node --minify && chmod +x ./dist/index.js",
-    "build:http": "bun build ./src/http.ts --outfile ./dist/http.js --target node --minify",
     "prepare": "bun run build",
     "start": "node ./dist/index.js",
-    "start:http": "node ./dist/http.js",
     "dev": "bun run ./src/index.ts",
-    "dev:http": "bun run ./src/http.ts",
     "check-types": "tsc --noEmit",
     "changeset": "changeset",
     "version": "changeset version"
@@ -25,10 +22,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@hono/node-server": "^2.0.4",
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "hono": "^4.12.24",
-    "zod": "^3.25.67"
+    "@modelcontextprotocol/sdk": "^1.29.0"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
@@ -42,16 +36,14 @@
     "stophy",
     "mcp",
     "mcp-server",
-    "youtube",
-    "youtube-data",
-    "youtube-api",
-    "youtube-transcript",
     "ai-agent",
     "ai-agents",
-    "youtube-for-ai",
     "llm",
-    "transcript",
-    "search"
+    "web-data",
+    "web-search",
+    "youtube",
+    "reddit",
+    "scraping"
   ],
   "mcpName": "io.github.stophydotdev/mcp",
   "homepage": "https://stophy.dev",

@@ -5,12 +5,11 @@ startCommand:
     properties:
       apiKey:
         type: string
-        description: Your Stophy API key from stophy.dev/dashboard
-    required:
-      - apiKey
+        description: Optional. Your Stophy API key from stophy.dev/signup. Without it, only the free tools are available.
+    required: []
   commandFunction: |-
     (config) => ({
       command: "npx",
       args: ["-y", "@stophy/mcp"],
-      env: { STOPHY_API_KEY: config.apiKey }
+      env: config.apiKey ? { STOPHY_API_KEY: config.apiKey } : {}
     })

@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stophydotdev/mcp",
-  "title": "Stophy MCP Server",
-  "description": "YouTube context API for AI agents: transcripts, comments, search, channels, and playlists as structured JSON.",
-  "version": "1.0.5",
+  "title": "Stophy",
+  "description": "Public web data for AI agents: search, social, video, places, shopping, jobs, real estate and more.",
+  "version": "2.0.0",
   "repository": {
     "url": "https://github.com/stophydotdev/mcp.git",
     "source": "github"
@@ -12,19 +12,45 @@
     {
       "registryType": "npm",
       "identifier": "@stophy/mcp",
-      "version": "1.0.5",
+      "version": "2.0.0",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
-          "description": "Your Stophy API key. Get one at https://stophy.dev/dashboard.",
-          "isRequired": true,
-          "format": "string",
+          "name": "STOPHY_API_KEY",
+          "description": "Optional Stophy API key for every tool. Without it, only the free tools are available. Get one at https://stophy.dev/signup.",
+          "isRequired": false,
           "isSecret": true,
-          "name": "STOPHY_API_KEY"
+          "format": "string"
         }
       ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.stophy.dev/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional. Your Stophy API key as a bearer token. Without it, only the free tools are available.",
+          "isRequired": false,
+          "isSecret": true,
+          "value": "Bearer {api_key}",
+          "variables": {
+            "api_key": {
+              "description": "Your Stophy API key",
+              "isRequired": false,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "streamable-http",
+      "url": "https://api.stophy.dev/mcp-oauth"
     }
   ]
 }
