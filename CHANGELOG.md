@@ -1,5 +1,13 @@
 # @stophy/mcp
 
+## 2.0.1
+
+### Patch Changes
+
+- 8fd4bc7: Update the package description and keywords, and add Cursor and Claude setup steps to the README.
+- 3f2b2b5: Remove the obsolete Smithery config file. Stophy is now listed on Smithery through its hosted server.
+- dd46af1: Sync the server.json description with the package description.
+
 ## 2.0.0
 
 ### Major Changes
