@@ -2,7 +2,9 @@
 
 [![smithery badge](https://smithery.ai/badge/stophy/mcp)](https://smithery.ai/servers/stophy/mcp)
 
-Give your AI agent public web data: web search, YouTube, Reddit, TikTok, Instagram, LinkedIn, maps, shopping, jobs, real estate, finance, and more. Your agent reaches every Stophy endpoint through three MCP tools.
+Live data from 40+ sites for AI agents over MCP: web search, YouTube, Reddit, Google Maps, Amazon, jobs, real estate, ads, stocks and crypto. Your agent reaches every Stophy endpoint through three MCP tools.
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=stophy&config=eyJ1cmwiOiJodHRwczovL2FwaS5zdG9waHkuZGV2L21jcC1vYXV0aCJ9)
 
 ## Connect to the hosted server
 
@@ -15,6 +17,10 @@ Most apps can connect to the hosted server directly. There is nothing to install
 | `https://api.stophy.dev/mcp-oauth` | Sign in with your browser | Every endpoint |
 
 Get an API key at [stophy.dev/signup](https://stophy.dev/signup).
+
+### Claude
+
+In Claude on the web, Desktop or mobile, open [Customize > Connectors](https://claude.ai/customize/connectors), choose **Add custom connector**, and paste `https://api.stophy.dev/mcp-oauth`. Sign in when Claude asks.
 
 ### Claude Code
 
@@ -53,7 +59,7 @@ codex mcp login stophy
 
 ### Cursor
 
-Add this to `.cursor/mcp.json`:
+Use the **Add to Cursor** button above to sign in with your browser, or add this to `.cursor/mcp.json` to use a key:
 
 ```json
 {

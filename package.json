@@ -1,7 +1,7 @@
 {
   "name": "@stophy/mcp",
   "version": "2.0.0",
-  "description": "Public web data for AI agents. Connects your MCP app to the hosted Stophy server.",
+  "description": "Live data from 40+ sites for AI agents over MCP: web search, YouTube, Reddit, Google Maps, Amazon, jobs, real estate, ads, stocks and crypto.",
   "type": "module",
   "bin": {
     "stophy-mcp": "dist/index.js"
@@ -43,7 +43,12 @@
     "web-search",
     "youtube",
     "reddit",
-    "scraping"
+    "scraping",
+    "google-maps",
+    "transcripts",
+    "ads",
+    "finance",
+    "crypto"
   ],
   "mcpName": "io.github.stophydotdev/mcp",
   "homepage": "https://stophy.dev",
