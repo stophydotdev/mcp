@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stophydotdev/mcp",
   "title": "Stophy",
-  "description": "Public web data for AI agents: search, social, video, places, shopping, jobs, real estate and more.",
+  "description": "Live data from 40+ sites for AI agents over MCP: web search, YouTube, Reddit, Google Maps, Amazon, jobs, real estate, ads, stocks and crypto.",
   "version": "2.0.0",
   "repository": {
     "url": "https://github.com/stophydotdev/mcp.git",
