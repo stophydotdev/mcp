@@ -1,5 +1,11 @@
 # @stophy/mcp
 
+## 2.0.2
+
+### Patch Changes
+
+- b333db0: The README now matches the current tools: `stophy_call` takes `id`, `input` and `fields` and returns JSON, ids are camelCase, and there is no feedback tool.
+
 ## 2.0.1
 
 ### Patch Changes
