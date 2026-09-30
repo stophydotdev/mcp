@@ -114,10 +114,10 @@ The package needs Node.js 18 or later.
 | Tool | What it does |
 | --- | --- |
 | `stophy_search_endpoints` | Finds the endpoint for a task, with its cost |
-| `stophy_describe_endpoint` | Shows the input an endpoint takes and whether it has more pages |
-| `stophy_call` | Runs an endpoint and returns markdown, or JSON when you ask for it |
+| `stophy_describe_endpoint` | Shows the input an endpoint takes and what it returns |
+| `stophy_call` | Runs an endpoint with `id`, `input` and optional `fields`, and returns JSON |
 
-Your agent usually searches, then describes, then calls. Each result says how many credits it used.
+Your agent usually searches, then describes, then calls. Endpoint ids are camelCase, such as `webSearch` or `youtubeSearch`. Lists come back as `results`, and `fields` keeps only the keys you name on each row. Each result says how many credits it used. One call returns one page for one flat price, and `limit` on a list endpoint keeps at most that many rows from the page at the same price.
 
 ## More
 
