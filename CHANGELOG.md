@@ -1,5 +1,11 @@
 # @stophy/mcp
 
+## 2.0.4
+
+### Patch Changes
+
+- 45a306d: The README lists apps and shopping among the things your agent can use, and says each endpoint shows its price before you call it. The new App Store, Google Play, Indeed, Tripadvisor and Walmart endpoints appear through the same three tools with no update, and a transcript's price terms show in `stophy_describe_endpoint`.
+
 ## 2.0.3
 
 ### Patch Changes
