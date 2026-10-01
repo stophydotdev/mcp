@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stophydotdev/mcp",
   "title": "Stophy",
-  "description": "Live data from 40+ sites for AI agents: web search, YouTube, Reddit, Maps, Amazon, jobs and more.",
+  "description": "One API for live, structured web data. REST, MCP, SDK and CLI.",
   "version": "2.0.0",
   "repository": {
     "url": "https://github.com/stophydotdev/mcp.git",
@@ -19,7 +19,7 @@
       "environmentVariables": [
         {
           "name": "STOPHY_API_KEY",
-          "description": "Optional Stophy API key for every tool. Without it, only the free tools are available. Get one at https://stophy.dev/signup.",
+          "description": "Optional Stophy API key for every tool. Without it, only web search works. Get one at https://stophy.dev/signup.",
           "isRequired": false,
           "isSecret": true,
           "format": "string"
@@ -34,7 +34,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Optional. Your Stophy API key as a bearer token. Without it, only the free tools are available.",
+          "description": "Optional. Your Stophy API key as a bearer token. Without it, only web search works.",
           "isRequired": false,
           "isSecret": true,
           "value": "Bearer {api_key}",

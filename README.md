@@ -2,7 +2,7 @@
 
 [![smithery badge](https://smithery.ai/badge/stophy/mcp)](https://smithery.ai/servers/stophy/mcp)
 
-Live data from 40+ sites for AI agents over MCP: web search, YouTube, Reddit, Google Maps, Amazon, jobs, real estate, ads, stocks and crypto. Your agent reaches every Stophy endpoint through three MCP tools.
+Live web data as typed JSON for AI agents. Search, video, social, jobs, places, property and ads behind one key, with a flat price per call. You pay only for answers that come back. Your agent reaches every Stophy endpoint through three MCP tools.
 
 [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=stophy&config=eyJ1cmwiOiJodHRwczovL2FwaS5zdG9waHkuZGV2L21jcC1vYXV0aCJ9)
 
@@ -12,7 +12,7 @@ Most apps can connect to the hosted server directly. There is nothing to install
 
 | URL | How you connect | What your agent can use |
 | --- | --- | --- |
-| `https://api.stophy.dev/mcp` | No key | The free endpoints: web search, YouTube search, and YouTube transcripts |
+| `https://api.stophy.dev/mcp` | No key | Web search only |
 | `https://api.stophy.dev/mcp` | `Authorization: Bearer <key>` header | Every endpoint |
 | `https://api.stophy.dev/mcp-oauth` | Sign in with your browser | Every endpoint |
 
@@ -82,7 +82,7 @@ Some apps can only start a local MCP server. For those, use this package. It run
 npx -y @stophy/mcp
 ```
 
-With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent gets the free endpoints.
+With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use web search only.
 
 ### Claude Desktop
 
