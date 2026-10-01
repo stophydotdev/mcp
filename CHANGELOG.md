@@ -1,5 +1,11 @@
 # @stophy/mcp
 
+## 2.0.3
+
+### Patch Changes
+
+- 0eb9e04: The description and README match the API we ship. Only web search works without a key.
+
 ## 2.0.2
 
 ### Patch Changes
