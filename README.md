@@ -2,7 +2,7 @@
 
 [![smithery badge](https://smithery.ai/badge/stophy/mcp)](https://smithery.ai/servers/stophy/mcp)
 
-Live web data as typed JSON for AI agents. Search, video, social, jobs, places, property and ads behind one key, with a flat price per call. You pay only for answers that come back. Your agent reaches every Stophy endpoint through three MCP tools.
+Live web data as typed JSON for AI agents. Search, video, social, jobs, places, shopping, apps, property and ads behind one key, with a price shown before every call. You pay only for answers that come back. Your agent reaches every Stophy endpoint through three MCP tools.
 
 [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=stophy&config=eyJ1cmwiOiJodHRwczovL2FwaS5zdG9waHkuZGV2L21jcC1vYXV0aCJ9)
 
@@ -117,7 +117,7 @@ The package needs Node.js 18 or later.
 | `stophy_describe_endpoint` | Shows the input an endpoint takes and what it returns |
 | `stophy_call` | Runs an endpoint with `id`, `input` and optional `fields`, and returns JSON |
 
-Your agent usually searches, then describes, then calls. Endpoint ids are camelCase, such as `webSearch` or `youtubeSearch`. Lists come back as `results`, and `fields` keeps only the keys you name on each row. Each result says how many credits it used. One call returns one page for one flat price, and `limit` on a list endpoint keeps at most that many rows from the page at the same price.
+Your agent usually searches, then describes, then calls. Endpoint ids are camelCase, such as `webSearch` or `youtubeSearch`. Lists come back as `results`, and `fields` keeps only the keys you name on each row. Each result says how many credits it used. One call returns one page at the price shown for that endpoint, and `limit` on a list endpoint keeps at most that many rows from the page at the same price.
 
 ## More
 
