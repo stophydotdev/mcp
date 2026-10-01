@@ -1,7 +1,7 @@
 {
   "name": "@stophy/mcp",
   "version": "2.0.2",
-  "description": "Live data from 40+ sites for AI agents over MCP: web search, YouTube, Reddit, Google Maps, Amazon, jobs, real estate, ads, stocks and crypto.",
+  "description": "One API for live, structured web data. REST, MCP, SDK and CLI.",
   "type": "module",
   "bin": {
     "stophy-mcp": "dist/index.js"
@@ -43,12 +43,9 @@
     "web-search",
     "youtube",
     "reddit",
-    "scraping",
     "google-maps",
     "transcripts",
-    "ads",
-    "finance",
-    "crypto"
+    "ads"
   ],
   "mcpName": "io.github.stophydotdev/mcp",
   "homepage": "https://stophy.dev",

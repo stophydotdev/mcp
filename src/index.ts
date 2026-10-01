@@ -43,7 +43,7 @@ const main = async (): Promise<void> => {
 	} catch (error) {
 		const reason = error instanceof Error ? error.message : String(error);
 		const hint = /401|unauthorized/iu.test(reason)
-			? " Check STOPHY_API_KEY, or unset it to use the free tools."
+			? " Check STOPHY_API_KEY, or unset it to use web search only."
 			: "";
 		throw new Error(`Could not connect to Stophy at ${url.origin}: ${reason}.${hint}`);
 	}
