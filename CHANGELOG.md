@@ -1,5 +1,11 @@
 # @stophy/mcp
 
+## 2.0.8
+
+### Patch Changes
+
+- 4a07907: Reddit search and Google Maps places now work without a key, next to Google search, Google News and YouTube.
+
 ## 2.0.7
 
 ### Patch Changes
