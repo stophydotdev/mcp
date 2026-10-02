@@ -1,5 +1,11 @@
 # @stophy/mcp
 
+## 2.0.7
+
+### Patch Changes
+
+- 8dddcb3: Sign in at https://mcp.stophy.dev/mcp. The old sign-in URL still works.
+
 ## 2.0.6
 
 ### Patch Changes
