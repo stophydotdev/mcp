@@ -1,5 +1,11 @@
 # @stophy/mcp
 
+## 2.0.6
+
+### Patch Changes
+
+- d5a346d: Docs: list endpoints return one page from the site, paged with `page` or the site's own `cursor`; `limit` is gone. List every endpoint that works without a key.
+
 ## 2.0.5
 
 ### Patch Changes
