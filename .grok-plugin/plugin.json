@@ -1,0 +1,13 @@
+{
+  "name": "stophy",
+  "description": "The web data layer for AI agents. Live, structured web data through the hosted MCP server at mcp.stophy.dev. Sign in with a Stophy account on first connect.",
+  "author": {
+    "name": "Stophy",
+    "email": "support@stophy.dev",
+    "url": "https://github.com/stophydotdev"
+  },
+  "homepage": "https://stophy.dev",
+  "repository": "https://github.com/stophydotdev/mcp",
+  "license": "MIT",
+  "keywords": ["stophy", "stophy mcp", "stophy web data"]
+}

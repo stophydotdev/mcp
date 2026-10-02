@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "stophy": {
+      "type": "http",
+      "url": "https://mcp.stophy.dev/mcp"
+    }
+  }
+}
