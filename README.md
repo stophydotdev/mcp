@@ -121,6 +121,13 @@ Your agent usually searches, then describes, then calls. Endpoint ids are camelC
 
 One call returns one page from the site at the price shown for that endpoint. Some list endpoints take `page` and return `page` and `hasMore`: ask for the next number while `hasMore` is true. Others return a `cursor` when there is more: pass it back unchanged as `cursor` to get the next page.
 
+## Network and credentials
+
+- The hosted server lives at `https://mcp.stophy.dev/mcp` (sign in) and `https://api.stophy.dev/mcp` (no key or an API key). Your client sends requests only there.
+- Credentials: browser sign-in handled by your MCP client, or an optional `STOPHY_API_KEY` that you set yourself. The local package also reads an optional `STOPHY_MCP_URL`.
+- The plugin manifests (`.mcp.json`, `.grok-plugin/plugin.json`, `mcp.json`, `plugin.json`) only point at the hosted server. They run no code on your machine.
+- No telemetry.
+
 ## More
 
 - [Stophy docs](https://docs.stophy.dev)
