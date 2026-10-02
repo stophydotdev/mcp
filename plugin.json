@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "stophy",
+  "version": "2.0.1",
+  "description": "The web data layer for AI agents.",
+  "author": { "name": "Stophy", "email": "support@stophy.dev", "url": "https://stophy.dev" },
+  "homepage": "https://docs.stophy.dev",
+  "repository": "https://github.com/stophydotdev/mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "web-data", "search", "ai-agents"]
+}
