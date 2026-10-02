@@ -12,7 +12,7 @@ Most apps can connect to the hosted server directly. There is nothing to install
 
 | URL | How you connect | What your agent can use |
 | --- | --- | --- |
-| `https://api.stophy.dev/mcp` | No key | Web search only |
+| `https://api.stophy.dev/mcp` | No key | Google search, Google News, YouTube search, YouTube video details and YouTube transcripts, within a free allowance |
 | `https://api.stophy.dev/mcp` | `Authorization: Bearer <key>` header | Every endpoint |
 | `https://api.stophy.dev/mcp-oauth` | Sign in with your browser | Every endpoint |
 
@@ -82,7 +82,7 @@ Some apps can only start a local MCP server. For those, use this package. It run
 npx -y @stophy/mcp
 ```
 
-With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use Google search only.
+With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use Google search, Google News, YouTube search, YouTube video details and YouTube transcripts.
 
 ### Claude Desktop
 
@@ -117,7 +117,9 @@ The package needs Node.js 18 or later.
 | `stophy_describe_endpoint` | Shows the input an endpoint takes and what it returns |
 | `stophy_call` | Runs an endpoint with `id`, `input` and optional `fields`, and returns JSON |
 
-Your agent usually searches, then describes, then calls. Endpoint ids are camelCase, such as `webSearch` or `youtubeSearch`. Lists come back as `results`, and `fields` keeps only the keys you name on each row. Each result says how many credits it used. One call returns one page at the price shown for that endpoint, and `limit` on a list endpoint keeps at most that many rows from the page at the same price.
+Your agent usually searches, then describes, then calls. Endpoint ids are camelCase, such as `googleSearch` or `youtubeSearch`. Lists come back as `results`, and `fields` keeps only the keys you name on each row. Each result says how many credits it used.
+
+One call returns one page from the site at the price shown for that endpoint. Some list endpoints take `page` and return `page` and `hasMore`: ask for the next number while `hasMore` is true. Others return a `cursor` when there is more: pass it back unchanged as `cursor` to get the next page.
 
 ## More
 
