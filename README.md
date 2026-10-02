@@ -14,20 +14,20 @@ Most apps can connect to the hosted server directly. There is nothing to install
 | --- | --- | --- |
 | `https://api.stophy.dev/mcp` | No key | Google search, Google News, YouTube search, YouTube video details and YouTube transcripts, within a free allowance |
 | `https://api.stophy.dev/mcp` | `Authorization: Bearer <key>` header | Every endpoint |
-| `https://api.stophy.dev/mcp-oauth` | Sign in with your browser | Every endpoint |
+| `https://mcp.stophy.dev/mcp` | Sign in with your browser | Every endpoint |
 
 Get an API key at [stophy.dev/signup](https://stophy.dev/signup).
 
 ### Claude
 
-In Claude on the web, Desktop or mobile, open [Customize > Connectors](https://claude.ai/customize/connectors), choose **Add custom connector**, and paste `https://api.stophy.dev/mcp-oauth`. Sign in when Claude asks.
+In Claude on the web, Desktop or mobile, open [Customize > Connectors](https://claude.ai/customize/connectors), choose **Add custom connector**, and paste `https://mcp.stophy.dev/mcp`. Sign in when Claude asks.
 
 ### Claude Code
 
 To sign in with your browser, add the server, then run `/mcp` and choose **Authenticate**:
 
 ```bash
-claude mcp add --transport http stophy https://api.stophy.dev/mcp-oauth
+claude mcp add --transport http stophy https://mcp.stophy.dev/mcp
 ```
 
 To use an API key:
@@ -53,7 +53,7 @@ codex mcp add stophy --url https://api.stophy.dev/mcp --bearer-token-env-var STO
 To sign in with your browser instead, add the sign-in URL, then log in:
 
 ```bash
-codex mcp add stophy --url https://api.stophy.dev/mcp-oauth
+codex mcp add stophy --url https://mcp.stophy.dev/mcp
 codex mcp login stophy
 ```
 
