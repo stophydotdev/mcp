@@ -12,7 +12,7 @@ Most apps can connect to the hosted server directly. There is nothing to install
 
 | URL | How you connect | What your agent can use |
 | --- | --- | --- |
-| `https://api.stophy.dev/mcp` | No key | Google search, Google News, YouTube search, YouTube video details and YouTube transcripts, within a free allowance |
+| `https://api.stophy.dev/mcp` | No key | Google search, Google News, YouTube search, YouTube video details, YouTube transcripts, Reddit search and Google Maps places, within a free allowance |
 | `https://api.stophy.dev/mcp` | `Authorization: Bearer <key>` header | Every endpoint |
 | `https://mcp.stophy.dev/mcp` | Sign in with your browser | Every endpoint |
 
@@ -82,7 +82,7 @@ Some apps can only start a local MCP server. For those, use this package. It run
 npx -y @stophy/mcp
 ```
 
-With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use Google search, Google News, YouTube search, YouTube video details and YouTube transcripts.
+With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use Google search, Google News, YouTube search, YouTube video details, YouTube transcripts, Reddit search and Google Maps places.
 
 ### Claude Desktop
 
