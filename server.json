@@ -19,7 +19,7 @@
       "environmentVariables": [
         {
           "name": "STOPHY_API_KEY",
-          "description": "Optional Stophy API key for every tool. Without it, only web search works. Get one at https://stophy.dev/signup.",
+          "description": "Optional Stophy API key for every tool. Without it, only Google search works. Get one at https://stophy.dev/signup.",
           "isRequired": false,
           "isSecret": true,
           "format": "string"
@@ -34,7 +34,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Optional. Your Stophy API key as a bearer token. Without it, only web search works.",
+          "description": "Optional. Your Stophy API key as a bearer token. Without it, only Google search works.",
           "isRequired": false,
           "isSecret": true,
           "value": "Bearer {api_key}",

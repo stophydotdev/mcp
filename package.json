@@ -41,6 +41,8 @@
     "llm",
     "web-data",
     "web-search",
+    "google-search",
+    "linkedin",
     "youtube",
     "reddit",
     "google-maps",

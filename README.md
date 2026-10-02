@@ -82,7 +82,7 @@ Some apps can only start a local MCP server. For those, use this package. It run
 npx -y @stophy/mcp
 ```
 
-With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use web search only.
+With `STOPHY_API_KEY` set, your agent can use every endpoint. Without it, your agent can use Google search only.
 
 ### Claude Desktop
 
