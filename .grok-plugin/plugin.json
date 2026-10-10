@@ -1,6 +1,6 @@
 {
   "name": "stophy",
-  "description": "The web data API for AI agents.",
+  "description": "Web scraping API for AI agents.",
   "author": {
     "name": "Stophy",
     "email": "support@stophy.dev",

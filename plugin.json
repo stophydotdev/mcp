@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "stophy",
-  "description": "The web data API for AI agents.",
+  "description": "Web scraping API for AI agents.",
   "author": { "name": "Stophy", "email": "support@stophy.dev", "url": "https://stophy.dev" },
   "homepage": "https://docs.stophy.dev",
   "repository": "https://github.com/stophydotdev/mcp",
