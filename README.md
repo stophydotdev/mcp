@@ -4,7 +4,7 @@
 
 Web scraping API for AI agents, as an MCP server. One API to search the web, read what people say, and look up products, places, jobs and homes. Pay only for answers. Your agent reaches every Stophy endpoint through three MCP tools.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=stophy&config=eyJ1cmwiOiJodHRwczovL2FwaS5zdG9waHkuZGV2L21jcC1vYXV0aCJ9)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=stophy&config=eyJ1cmwiOiJodHRwczovL21jcC5zdG9waHkuZGV2L21jcCJ9)
 
 ## Connect to the hosted server
 
