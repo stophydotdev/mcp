@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "stophy",
+  "description": "Give your agents the live web.",
+  "author": {
+    "name": "Stophy",
+    "email": "support@stophy.dev",
+    "url": "https://stophy.dev"
+  },
+  "homepage": "https://docs.stophy.dev",
+  "repository": "https://github.com/stophydotdev/stophy",
+  "license": "MIT",
+  "keywords": ["mcp", "web-data", "search", "ai-agents"]
+}

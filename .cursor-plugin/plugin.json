@@ -1,0 +1,30 @@
+{
+  "name": "stophy",
+  "version": "1.0.8",
+  "description": "Give your agents the live web. One API to search the web, read what people say, and look up products, places, jobs and homes.",
+  "author": {
+    "name": "Stophy"
+  },
+  "homepage": "https://docs.stophy.dev",
+  "repository": "https://github.com/stophydotdev/stophy",
+  "license": "MIT",
+  "keywords": [
+    "web-data",
+    "search",
+    "youtube",
+    "reddit",
+    "maps",
+    "jobs",
+    "shopping",
+    "apps",
+    "real-estate",
+    "ads",
+    "mcp"
+  ],
+  "logo": "assets/logo.svg",
+  "mcpServers": {
+    "stophy": {
+      "url": "https://mcp.stophy.dev/mcp"
+    }
+  }
+}
